@@ -100,6 +100,7 @@ public class LoadBalancer {
 
 			// Get imageID
 
+			/*
 			Filter filterImageByName = new Filter("name");
 	        filterImageByName.withValues("CNV-Project");
 			
@@ -108,9 +109,9 @@ public class LoadBalancer {
 
 			List<Image> images = describeImagesResult.getImages();
 			String imageID = images.get(0).getImageId();
+			*/
 
-
-			//String imageID = "ami-0c52f2cecaaebc721";
+			String imageID = "ami-0c52f2cecaaebc721";
 			System.out.println(imageID);
 
 			// Get active instances
