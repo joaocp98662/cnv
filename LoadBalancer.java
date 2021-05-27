@@ -121,7 +121,7 @@ public class LoadBalancer {
 
 				// Start an instance - Auto Scaler
 				String instanceID = LoadBalancer.startInstance(imageID);
-				System.out.println("Starting a new instance with ID " + instanceID + "...");
+				System.out.println("Starting a new instance with ID " + instanceID + " ...");
 
 				// Wating for running instance to run
 				while(checkInstanceRunning(instanceID) == false) {
