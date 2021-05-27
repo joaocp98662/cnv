@@ -443,7 +443,10 @@ public class LoadBalancer {
             Filter filterEC2ByState = new Filter("instance-state-name");
             filterEC2ByState.withValues("running");
 
-			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);			
+	        DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
+	        describeInstancesRequest.withFilters(filterEC2ByID, filterEC2ByState);
+
+			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);		
 
 			Reservation reservation = describeInstancesResult.getReservations().get(0);
 
