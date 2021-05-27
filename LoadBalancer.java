@@ -158,8 +158,6 @@ public class LoadBalancer {
 				}
 			}
 
-			System.out.println("ENTROU 5");
-
 			System.out.println("Request will be send to " + instanceIP);
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
