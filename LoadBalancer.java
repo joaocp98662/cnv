@@ -126,13 +126,14 @@ public class LoadBalancer {
 
 				System.out.println("INSTANCE ID " + instanceID);
 
-				//Obtain instance IP address
-				instanceIP = LoadBalancer.getInstanceIP(instanceID);
-
 				// Wating for running instance to run
 				while((LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID)).isEmpty()) {
 					Thread.sleep(500);
+					System.out.println("TESTE WHILE LOOP");
 				}
+
+				//Obtain instance IP address
+				instanceIP = LoadBalancer.getInstanceIP(instanceID);
 
 
 			} else {
@@ -144,14 +145,14 @@ public class LoadBalancer {
 					// Start an instance - Auto Scaler
 					String instanceID = LoadBalancer.startInstance(imageID);
 
-					//Obtain instance IP address
-					instanceIP = LoadBalancer.getInstanceIP(instanceID);
-
 					// Wating for running instance to run
 					while((LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID)).isEmpty()) {
 						Thread.sleep(500);
 						System.out.println("TESTE WHILE LOOP");
 					}
+
+					//Obtain instance IP address
+					instanceIP = LoadBalancer.getInstanceIP(instanceID);					
 
 
 				} else {
