@@ -473,7 +473,7 @@ public class LoadBalancer {
             filterEC2ByState.withValues("running");
 
             Filter filterLBInstance = new Filter("instance-id");
-            filterLBInstance.withValues("!" + loadBalancerInstanceID);
+            filterLBInstance.withValues(!loadBalancerInstanceID);
 
 			DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
 			describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState, filterLBInstance);
