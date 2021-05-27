@@ -278,10 +278,8 @@ public class LoadBalancer {
 			}
 
 			try {
-				System.out.println("TESTE TESTE TESTE");
-				InputStream response = LoadBalancer.manageWorkLoad(query);
 
-				System.out.println("TESTE TESTE TESTE AFTER");
+				InputStream response = LoadBalancer.manageWorkLoad(query);
 
 				// Send response to browser.
 				final Headers hdrs = t.getResponseHeaders();
@@ -329,7 +327,6 @@ public class LoadBalancer {
 
         try {
 
-            System.out.println("Starting a new instance.");
             RunInstancesRequest runInstancesRequest = new RunInstancesRequest();
 
             runInstancesRequest.withImageId(imageID)
@@ -432,8 +429,6 @@ public class LoadBalancer {
 
 		try {
 
-			System.out.println("Checking...");
-
 	        Filter filterEC2ByID = new Filter("instance-id");
 	        filterEC2ByID.withValues(instanceID);
 
@@ -445,17 +440,11 @@ public class LoadBalancer {
 
 			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);
 
-			System.out.println("Checking 2 ...");
-
 			List<Reservation> reservations = describeInstancesResult.getReservations(); 
-
-			System.out.println("Teste - " + reservations);
 
 			if (reservations.size() > 0) {
 				instanceRunning = true;
 			}
-
-			System.out.println("1 - " + instanceRunning);
 
         } catch (AmazonServiceException ase) {
                 System.out.println("Caught Exception: " + ase.getMessage());
@@ -463,8 +452,6 @@ public class LoadBalancer {
                 System.out.println("Error Code: " + ase.getErrorCode());
                 System.out.println("Request ID: " + ase.getRequestId());
         }
-
-        System.out.println("1 - " + instanceRunning);
 
         return instanceRunning;
 	}	
