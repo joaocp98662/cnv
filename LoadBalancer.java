@@ -129,7 +129,7 @@ public class LoadBalancer {
 				System.out.println("INSTANCE ID " + instanceID);
 
 				// Wating for running instance to run
-				while(checkInstanceRunning(instanceID)) {
+				while(checkInstanceRunning(instanceID) == false) {
 					Thread.sleep(500);
 					System.out.println("TESTE WHILE LOOP");
 				}
@@ -144,12 +144,12 @@ public class LoadBalancer {
 				if(instancesMap.isEmpty()) {
 
 					System.out.println("ENTROU 3");
-					
+
 					// Start an instance - Auto Scaler
 					String instanceID = LoadBalancer.startInstance(imageID);
 
 					// Wating for running instance to run
-					while(checkInstanceRunning(instanceID)) {
+					while(checkInstanceRunning(instanceID) == false) {
 						Thread.sleep(500);
 						System.out.println("TESTE WHILE LOOP");
 					}
