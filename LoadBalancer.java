@@ -158,6 +158,8 @@ public class LoadBalancer {
 				}
 			}
 
+			System.out.println("ENTROU 5");
+
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
 			// Updates instanceMap
