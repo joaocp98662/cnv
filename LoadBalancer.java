@@ -105,7 +105,7 @@ public class LoadBalancer {
 	        filterImageByName.withValues("CNV-Project");
 			
         	DescribeImagesRequest describesImagesRequest = new DescribeImagesRequest();
-        	withFilters(filterImageByName);
+        	describesImagesRequest.withFilters(filterImageByName);
 
         	DescribeImagesResult describeImagesResult = ec2.describeImages(describesImagesRequest);
 
