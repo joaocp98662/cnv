@@ -97,19 +97,20 @@ public class LoadBalancer {
 			String loadBalancerInstanceID = "i-0c65f95829151ddbb";
 
 			System.out.println("Entrou 0");
+
 			// Get imageID
 
-			/*
 			Filter filterImageByName = new Filter("name");
-	        	filterImageByName.withValues("CNV-project");
+	        filterImageByName.withValues("CNV-Project");
 			
-	        	DescribeImagesRequest describesImagesRequest = new DescribeImagesRequest();
-	        	DescribeImagesResult describeImagesResult = ec2.describeImages(describesImagesRequest);
+        	DescribeImagesRequest describesImagesRequest = new DescribeImagesRequest();
+        	DescribeImagesResult describeImagesResult = ec2.describeImages(describesImagesRequest);
 
 			List<Image> images = describeImagesResult.getImages();
 			String imageID = images.get(0).getImageId();
-			*/
-			String imageID = "ami-0c52f2cecaaebc721";
+
+
+			//String imageID = "ami-0c52f2cecaaebc721";
 			System.out.println(imageID);
 
 			// Get active instances
@@ -166,6 +167,8 @@ public class LoadBalancer {
 			}
 
 			System.out.println("ENTROU 5");
+
+			System.out.println(instanceIP);
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
@@ -454,7 +457,7 @@ public class LoadBalancer {
 
 			List<Reservation> reservations = describeInstancesResult.getReservations(); 
 
-			System.out.println("Teste - " + reservation);
+			System.out.println("Teste - " + reservations);
 
 			if (reservations.size() > 0) {
 				instanceRunning = true;
