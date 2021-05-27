@@ -93,6 +93,9 @@ public class LoadBalancer {
 		init();
 
 		try {
+
+			String loadBalancerInstanceID = "i-0c65f95829151ddbb";
+
 			System.out.println("Entrou 0");
 			// Get imageID
 
@@ -106,11 +109,11 @@ public class LoadBalancer {
 			List<Image> images = describeImagesResult.getImages();
 			String imageID = images.get(0).getImageId();
 			*/
-			String imageID = "ami-023b4c8b69bcf53d6";
+			String imageID = "ami-0c52f2cecaaebc721";
 			System.out.println(imageID);
 
 			// Get active instances
-			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID);
+			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID);
 
 			String instanceIP = null;
 
@@ -417,7 +420,7 @@ public class LoadBalancer {
         return instanceExists;
 	}
 
-	public static synchronized Set<Instance> listRunningInstancesByImageID(String imageID) throws Exception {
+	public static synchronized Set<Instance> listRunningInstancesByImageID(String imageID, String loadBalancerInstanceID) throws Exception {
 
 		//init();
 
@@ -435,8 +438,11 @@ public class LoadBalancer {
             Filter filterEC2ByState = new Filter("instance-state-name");
             filterEC2ByState.withValues("running");
 
+            Filter filterLBInstance = new Filter("instance-id")
+            filterLBInstance.withValues("!" + loadBalancerInstanceID);
+
 			DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
-			describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState);
+			describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState, filterLBInstance);
 
 			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);
 
