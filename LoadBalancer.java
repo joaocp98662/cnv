@@ -94,12 +94,12 @@ public class LoadBalancer {
 
 		try {
 
-			String loadBalancerInstanceID = "i-0c65f95829151ddbb";
+			String loadBalancerInstanceID = "i-0e3929643c6a61e6c";
 
 			// Get imageID
 
 			Filter filterImageByName = new Filter("name");
-	        filterImageByName.withValues("CNV-Project");
+	        filterImageByName.withValues("test");
 			
         	DescribeImagesRequest describesImagesRequest = new DescribeImagesRequest();
         	describesImagesRequest.withFilters(filterImageByName);
@@ -331,7 +331,7 @@ public class LoadBalancer {
                                .withInstanceType("t2.micro")
                                .withMinCount(1)
                                .withMaxCount(1)
-                               .withKeyName("CNV-project")
+                               .withKeyName("CNV-labs-AWS")
                                .withSecurityGroups("CNV-project");
                                
             RunInstancesResult runInstancesResult = ec2.runInstances(runInstancesRequest);
