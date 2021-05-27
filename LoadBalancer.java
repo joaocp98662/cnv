@@ -437,6 +437,8 @@ public class LoadBalancer {
 
 		try {
 
+			System.out.println("Checking...");
+
 	        Filter filterEC2ByID = new Filter("instance-id");
 	        filterEC2ByID.withValues(instanceID);
 
@@ -454,12 +456,16 @@ public class LoadBalancer {
 				instanceRunning = true;
 			}
 
+			System.out.println("1 - " + instanceRunning);
+
         } catch (AmazonServiceException ase) {
                 System.out.println("Caught Exception: " + ase.getMessage());
                 System.out.println("Reponse Status Code: " + ase.getStatusCode());
                 System.out.println("Error Code: " + ase.getErrorCode());
                 System.out.println("Request ID: " + ase.getRequestId());
         }
+
+        System.out.println("1 - " + instanceRunning);
 
         return instanceRunning;
 	}	
