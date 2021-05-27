@@ -438,7 +438,7 @@ public class LoadBalancer {
             Filter filterEC2ByState = new Filter("instance-state-name");
             filterEC2ByState.withValues("running");
 
-            Filter filterLBInstance = new Filter("instance-id")
+            Filter filterLBInstance = new Filter("instance-id");
             filterLBInstance.withValues("!" + loadBalancerInstanceID);
 
 			DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
