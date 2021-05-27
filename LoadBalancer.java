@@ -96,11 +96,8 @@ public class LoadBalancer {
 
 			String loadBalancerInstanceID = "i-0c65f95829151ddbb";
 
-			System.out.println("Entrou 0");
-
 			// Get imageID
 
-			
 			Filter filterImageByName = new Filter("name");
 	        filterImageByName.withValues("CNV-Project");
 			
@@ -112,34 +109,28 @@ public class LoadBalancer {
 			List<Image> images = describeImagesResult.getImages();
 			String imageID = images.get(0).getImageId();
 			
-
-			//String imageID = "ami-0c52f2cecaaebc721";
-			System.out.println(imageID);
+			System.out.println("AMI ID - " + imageID);
 
 			// Get active instances
 			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID);
 
 			String instanceIP = null;
 
-			System.out.println("ENTROU 1");
-
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
 
-				System.out.println("ENTROU 2");
 				// Start an instance - Auto Scaler
 				String instanceID = LoadBalancer.startInstance(imageID);
-
-				System.out.println("INSTANCE ID " + instanceID);
+				System.out.println("Starting a new instance with ID " + instanceID + "...");
 
 				// Wating for running instance to run
 				while(checkInstanceRunning(instanceID) == false) {
-					Thread.sleep(500);
-					System.out.println("TESTE WHILE LOOP");
+					Thread.sleep(500);					
 				}
 
 				//Obtain instance IP address
 				instanceIP = LoadBalancer.getInstanceIP(instanceID);
+				System.out.println("Instance " + instanceID + "running with IP address " + instanceIP);
 
 
 			} else {
@@ -147,31 +138,29 @@ public class LoadBalancer {
 				// check if there are instances running that are free (not running queries)
 				if(instancesMap.isEmpty()) {
 
-					System.out.println("ENTROU 3");
-
 					// Start an instance - Auto Scaler
 					String instanceID = LoadBalancer.startInstance(imageID);
+					System.out.println("Starting a new instance with ID " + instanceID + "...");
 
 					// Wating for running instance to run
 					while(checkInstanceRunning(instanceID) == false) {
 						Thread.sleep(500);
-						System.out.println("TESTE WHILE LOOP");
 					}
 
 					//Obtain instance IP address
 					instanceIP = LoadBalancer.getInstanceIP(instanceID);					
-
+					System.out.println("Instance " + instanceID + "running with IP address " + instanceIP);
 
 				} else {
 
-					System.out.println("ENTROU 4");
+					System.out.println("Else");
 
 				}
 			}
 
 			System.out.println("ENTROU 5");
 
-			System.out.println(instanceIP);
+			System.out.println("Request will be send to " instanceIP);
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
