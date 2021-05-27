@@ -148,6 +148,7 @@ public class LoadBalancer {
 					// Wating for running instance to run
 					while((LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID)).isEmpty()) {
 						Thread.sleep(500);
+						System.out.println("TESTE WHILE LOOP");
 					}
 
 
