@@ -124,6 +124,8 @@ public class LoadBalancer {
 				// Start an instance - Auto Scaler
 				String instanceID = LoadBalancer.startInstance(imageID);
 
+				System.out.println("INSTANCE ID " + instanceID);
+
 				//Obtain instance IP address
 				instanceIP = LoadBalancer.getInstanceIP(instanceID);
 
