@@ -448,7 +448,9 @@ public class LoadBalancer {
 	        DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
 	        describeInstancesRequest.withFilters(filterEC2ByID, filterEC2ByState);
 
-			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);		
+			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);
+
+			System.out.println("Checking 2 ...");
 
 			Reservation reservation = describeInstancesResult.getReservations().get(0);
 
