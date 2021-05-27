@@ -454,6 +454,8 @@ public class LoadBalancer {
 
 			Reservation reservation = describeInstancesResult.getReservations().get(0);
 
+			System.out.println("Teste - " + reservation);
+
 			if (reservation != null) {
 				instanceRunning = true;
 			}
