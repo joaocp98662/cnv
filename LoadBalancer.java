@@ -128,7 +128,7 @@ public class LoadBalancer {
 				instanceIP = LoadBalancer.getInstanceIP(instanceID);
 
 				// Wating for running instance to run
-				while((LoadBalancer.listRunningInstancesByImageID(imageID)).isEmpty()) {
+				while((LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID)).isEmpty()) {
 					Thread.sleep(500);
 				}
 
@@ -146,7 +146,7 @@ public class LoadBalancer {
 					instanceIP = LoadBalancer.getInstanceIP(instanceID);
 
 					// Wating for running instance to run
-					while((LoadBalancer.listRunningInstancesByImageID(imageID)).isEmpty()) {
+					while((LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID)).isEmpty()) {
 						Thread.sleep(500);
 					}
 
