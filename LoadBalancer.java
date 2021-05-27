@@ -452,11 +452,11 @@ public class LoadBalancer {
 
 			System.out.println("Checking 2 ...");
 
-			Reservation reservation = describeInstancesResult.getReservations().get(0);
+			List<Reservation> reservations = describeInstancesResult.getReservations(); 
 
 			System.out.println("Teste - " + reservation);
 
-			if (reservation != null) {
+			if (reservations.size() > 0) {
 				instanceRunning = true;
 			}
 
