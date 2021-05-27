@@ -118,8 +118,10 @@ public class LoadBalancer {
 			String instanceIP = null;
 
 			System.out.println("ENTROU 1");
+
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
+
 				System.out.println("ENTROU 2");
 				// Start an instance - Auto Scaler
 				String instanceID = LoadBalancer.startInstance(imageID);
@@ -127,7 +129,7 @@ public class LoadBalancer {
 				System.out.println("INSTANCE ID " + instanceID);
 
 				// Wating for running instance to run
-				while((LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID)).isEmpty()) {
+				while(checkInstanceRunning(instanceID)) {
 					Thread.sleep(500);
 					System.out.println("TESTE WHILE LOOP");
 				}
@@ -142,11 +144,12 @@ public class LoadBalancer {
 				if(instancesMap.isEmpty()) {
 
 					System.out.println("ENTROU 3");
+					
 					// Start an instance - Auto Scaler
 					String instanceID = LoadBalancer.startInstance(imageID);
 
 					// Wating for running instance to run
-					while((LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID)).isEmpty()) {
+					while(checkInstanceRunning(instanceID)) {
 						Thread.sleep(500);
 						System.out.println("TESTE WHILE LOOP");
 					}
@@ -425,6 +428,38 @@ public class LoadBalancer {
 
         return instanceExists;
 	}
+
+	public static boolean checkInstanceRunning(String instanceID) throws Exception {
+
+		//init();
+
+		boolean instanceRunning = false;
+
+		try {
+
+	        Filter filterEC2ByID = new Filter("instance-id");
+	        filterEC2ByID.withValues(instanceID);
+
+            Filter filterEC2ByState = new Filter("instance-state-name");
+            filterEC2ByState.withValues("running");
+
+			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);			
+
+			Reservation reservation = describeInstancesResult.getReservations().get(0);
+
+			if (reservation != null) {
+				instanceRunning = true;
+			}
+
+        } catch (AmazonServiceException ase) {
+                System.out.println("Caught Exception: " + ase.getMessage());
+                System.out.println("Reponse Status Code: " + ase.getStatusCode());
+                System.out.println("Error Code: " + ase.getErrorCode());
+                System.out.println("Request ID: " + ase.getRequestId());
+        }
+
+        return instanceRunning;
+	}	
 
 	public static synchronized Set<Instance> listRunningInstancesByImageID(String imageID, String loadBalancerInstanceID) throws Exception {
 
