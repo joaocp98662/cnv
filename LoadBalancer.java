@@ -184,7 +184,9 @@ public class LoadBalancer {
 	public static InputStream sendRequestToInstance(String instanceIP, String query) throws IOException {
 
 		String url = "http://" + instanceIP + ":8000/scan?" + query;
-
+		
+		System.out.println("The url is: " + url); //debug
+		
 		// Send an HTTP Request with the given query to the instance's IP address and receives its response
 		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 		connection.setRequestMethod("GET");
@@ -193,6 +195,8 @@ public class LoadBalancer {
 		// Get the response code 
 		int statusCode = connection.getResponseCode();
 
+		System.out.println(statusCode); //debug
+		
 		InputStream response = null;
 
 		if (statusCode >= HttpURLConnection.HTTP_BAD_REQUEST) {
