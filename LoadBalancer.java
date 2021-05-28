@@ -187,7 +187,7 @@ public class LoadBalancer {
 
 		String url = "http://" + instanceIP + ":8000/scan?" + query;
 		
-		URLEncoder encode(url);
+		//URLEncoder.encode(url);
 		
 		// Send an HTTP Request with the given query to the instance's IP address and receives its response
 		//HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
