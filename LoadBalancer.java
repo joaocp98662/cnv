@@ -190,10 +190,10 @@ public class LoadBalancer {
 		//URLEncoder.encode(url);
 		
 		// Send an HTTP Request with the given query to the instance's IP address and receives its response
-		//HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-		URLConnection connection = new URL(url).openConnection();
-		connection.setRequestProperty("Accept-Charset", charset);
-		//connection.setRequestMethod("GET");
+		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+		//URLConnection connection = new URL(url).openConnection();
+		
+		connection.setRequestMethod("GET");
 		//connection.setRequestProperty("Accept-Charset", charset);
 
 		// Get the response code 
