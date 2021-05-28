@@ -64,7 +64,7 @@ public class LoadBalancer {
 	static ServerArgumentParser sap = null;
 
 	// Multimap declaration
-	private static Multimap<Character, String> instancesMap = ArrayListMultimap.create();
+	private static Multimap<String, String> instancesMap = ArrayListMultimap.create();
 
 	//private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
