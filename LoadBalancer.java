@@ -51,8 +51,8 @@ import com.amazonaws.services.cloudwatch.model.GetMetricStatisticsResult;
 import com.amazonaws.services.ec2.model.DescribeAvailabilityZonesResult;
 
 //Zé adicionou
-//import com.google.common.collect.Multimap;
-//import com.google.common.collect.ArrayListMultimap;  multimap
+import com.google.common.collect.Multimap;
+import com.google.common.collect.ArrayListMultimap;  multimap
 
 import database.DataBase;
 
