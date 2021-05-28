@@ -52,7 +52,7 @@ import com.amazonaws.services.ec2.model.DescribeAvailabilityZonesResult;
 
 //Zé adicionou
 import com.google.common.collect.Multimap;
-import com.google.common.collect.ArrayListMultimap;  multimap
+import com.google.common.collect.ArrayListMultimap;  
 
 import database.DataBase;
 
@@ -74,7 +74,7 @@ public class LoadBalancer {
 	// Fill multimap with data
 	for (String name : names) {
 	    multimap.put(name.charAt(0), name);
-}
+	}
  
 // Use of the multimap
 	multimap.get('C'); // -> [Carol]
