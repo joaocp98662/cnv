@@ -63,26 +63,12 @@ public class LoadBalancer {
 
 	static ServerArgumentParser sap = null;
 
-	private static HashMap<String, String> instancesMap = new HashMap<String, String>();
+	// Multimap declaration
+	private static Multimap<Character, String> instancesMap = ArrayListMultimap.create();
+
+	//private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
 	public static void main(final String[] args) throws Exception {
-
-		// Given names
-	String[] names = { "Bob", "Alice", "Andy", "Carol", "Ben" };
- 
-	// Multimap declaration
-	Multimap<Character, String> multimap = ArrayListMultimap.create();
- 
-	// Fill multimap with data
-	for (String name : names) {
-	    multimap.put(name.charAt(0), name);
-	}
- 
-	// Use of the multimap
-	multimap.get('C'); // -> [Carol]
-	multimap.get('A'); // -> [Alice, Andy]
-
-	System.out.println(multimap);
 
 		try {
 			// Get user-provided flags.
@@ -183,12 +169,18 @@ public class LoadBalancer {
 
 			System.out.println("Request will be send to " + instanceIP);
 
-			//TODO Hasmap-->    queries / ip_instance
+			//TODO Hasmap-->    ip_instance and list of queries
+
+			instancesMap.put(instanceIP, query);
+
+			System.out.println(instancesMap);
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
 			// Updates instanceMap of queries/instances running
-			instancesMap.remove(query);
+			instancesMap.remove(instanceIP, query);
+
+			System.out.println(instancesMap);
 
 			return response;
 
