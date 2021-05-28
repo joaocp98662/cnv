@@ -51,8 +51,8 @@ import com.amazonaws.services.cloudwatch.model.GetMetricStatisticsResult;
 import com.amazonaws.services.ec2.model.DescribeAvailabilityZonesResult;
 
 //Zé adicionou
-import com.google.common.collect.Multimap;
-import com.google.common.collect.ArrayListMultimap;
+//import com.google.common.collect.Multimap;
+//import com.google.common.collect.ArrayListMultimap;  multimap
 
 import database.DataBase;
 
@@ -65,8 +65,23 @@ public class LoadBalancer {
 
 	private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
-	//Zé adicionou:
-	private static ListMultimap<String, String> multimap = ArrayListMultimap.create();
+	// Given names
+	String[] names = { "Bob", "Alice", "Andy", "Carol", "Ben" };
+
+	// Multimap declaration
+	Multimap<Character, String> multimap = ArrayListMultimap.create();
+	 
+	// Fill multimap with data
+	for (String name : names) {
+	    multimap.put(name.charAt(0), name);
+}
+ 
+// Use of the multimap
+	multimap.get('C'); // -> [Carol]
+
+	multimap.get('A'); // -> [Alice, Andy
+
+	System.out.println(multimap);
 
 	public static void main(final String[] args) throws Exception {
 
