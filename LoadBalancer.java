@@ -184,15 +184,6 @@ public class LoadBalancer {
 			System.out.println("Request will be send to " + instanceIP);
 
 			//TODO Hasmap-->    queries / ip_instance
-			multimap.put("John", "Adams");
-			multimap.put("John", "Tyler");
-	        multimap.put("John", "Kennedy");
-	        multimap.put("George", "Washington");
-	        multimap.put("George", "Bush");
- 
-
-			 System.out.println("John" + ": " + multimap.get("John"));
-
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
