@@ -67,19 +67,18 @@ public class LoadBalancer {
 
 	// Given names
 	String[] names = { "Bob", "Alice", "Andy", "Carol", "Ben" };
-
+ 
 	// Multimap declaration
 	Multimap<Character, String> multimap = ArrayListMultimap.create();
-	 
+ 
 	// Fill multimap with data
 	for (String name : names) {
 	    multimap.put(name.charAt(0), name);
 	}
  
-// Use of the multimap
+	// Use of the multimap
 	multimap.get('C'); // -> [Carol]
-
-	multimap.get('A'); // -> [Alice, Andy
+	multimap.get('A'); // -> [Alice, Andy]
 
 	System.out.println(multimap);
 
