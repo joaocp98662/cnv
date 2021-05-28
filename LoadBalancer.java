@@ -160,9 +160,11 @@ public class LoadBalancer {
 
 			System.out.println("Request will be send to " + instanceIP);
 
+			//TODO Hasmap-->    queries / ip_instance
+
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
-			// Updates instanceMap
+			// Updates instanceMap of queries/instances running
 			instancesMap.remove(query);
 
 			return response;
@@ -185,8 +187,7 @@ public class LoadBalancer {
 
 		String url = "http://" + instanceIP + ":8000/scan?" + query;
 		
-		System.out.println("The url is: " + url); //debug
-		URLEncoder#encode(url);
+		URLEncoder encode(url);
 		
 		// Send an HTTP Request with the given query to the instance's IP address and receives its response
 		//HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
@@ -197,8 +198,6 @@ public class LoadBalancer {
 
 		// Get the response code 
 		int statusCode = connection.getResponseCode();
-
-		System.out.println(statusCode); //debug
 		
 		InputStream response = null;
 
@@ -206,6 +205,7 @@ public class LoadBalancer {
 		    throw new IOException("Error connecting to " + url + '(' + statusCode + ")");
 		}
 
+		System.out.println("Request status: " + statusCode);
 		return connection.getInputStream();
 	}
 
