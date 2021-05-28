@@ -99,7 +99,7 @@ public class LoadBalancer {
 			// Get imageID
 
 			Filter filterImageByName = new Filter("name");
-	        filterImageByName.withValues("CNV-project");
+	        filterImageByName.withValues("CNV-Project");
 			
         	DescribeImagesRequest describesImagesRequest = new DescribeImagesRequest();
         	describesImagesRequest.withFilters(filterImageByName);
