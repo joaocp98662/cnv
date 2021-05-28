@@ -50,6 +50,10 @@ import com.amazonaws.services.cloudwatch.model.GetMetricStatisticsRequest;
 import com.amazonaws.services.cloudwatch.model.GetMetricStatisticsResult;
 import com.amazonaws.services.ec2.model.DescribeAvailabilityZonesResult;
 
+//Zé adicionou
+import com.google.common.collect.Multimap;
+import com.google.common.collect.ArrayListMultimap;
+
 import database.DataBase;
 
 public class LoadBalancer {
@@ -60,6 +64,9 @@ public class LoadBalancer {
 	static ServerArgumentParser sap = null;
 
 	private static HashMap<String, String> instancesMap = new HashMap<String, String>();
+
+	//Zé adicionou:
+	private static ListMultimap<String, String> multimap = ArrayListMultimap.create();
 
 	public static void main(final String[] args) throws Exception {
 
@@ -114,6 +121,8 @@ public class LoadBalancer {
 			// Get active instances
 			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID);
 
+			//System.out-println(instances.);
+
 			String instanceIP = null;
 
 			// Check if there are no instances running
@@ -161,6 +170,15 @@ public class LoadBalancer {
 			System.out.println("Request will be send to " + instanceIP);
 
 			//TODO Hasmap-->    queries / ip_instance
+			multimap.put("John", "Adams");
+			multimap.put("John", "Tyler");
+	        multimap.put("John", "Kennedy");
+	        multimap.put("George", "Washington");
+	        multimap.put("George", "Bush");
+ 
+
+			 System.out.println("John" + ": " + multimap.get("John"));
+
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
