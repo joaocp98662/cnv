@@ -65,7 +65,9 @@ public class LoadBalancer {
 
 	private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
-	// Given names
+	public static void main(final String[] args) throws Exception {
+
+		// Given names
 	String[] names = { "Bob", "Alice", "Andy", "Carol", "Ben" };
  
 	// Multimap declaration
@@ -81,8 +83,6 @@ public class LoadBalancer {
 	multimap.get('A'); // -> [Alice, Andy]
 
 	System.out.println(multimap);
-
-	public static void main(final String[] args) throws Exception {
 
 		try {
 			// Get user-provided flags.
