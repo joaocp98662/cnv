@@ -140,38 +140,47 @@ public class LoadBalancer {
 				System.out.println("Instance " + instanceID + "running with IP address " + instanceIP);
 
 
-			} else {
-
-				// check if there are instances running that are free (not running queries)
-				if(instancesMap.isEmpty()) {
-
-					//Send the request to one of the free instances
-
-					Instance instance = instances.iterator().next();
+			} else { /* instances running in AWS */
 
 
-					instanceIP = instance.getPublicIpAddress();
-					System.out.println(instance.getInstanceId());
+				//Check if any of the AWS instances not exists in the HashMap of running instances. Free instance
 
-					//Note: Correct startInstance method to return an instance object
+				Iterator<Instance> inst = instances.iterator();
 
-				} else {
+				while(inst.hasNext()) {
+  					
+					if(instancesMap.get(inst.getPublicIpAddress().toString().equals("[]"))) {
 
-					// Start an instance - Auto Scaler
-					String instanceID = LoadBalancer.startInstance(imageID);
-					System.out.println("Starting a new instance with ID " + instanceID + "...");
-
-					// Wating for running instance to run
-					while(checkInstanceRunning(instanceID) == false) {
-						Thread.sleep(500);
+						instanceIP = inst.getPublicIpAddress();
+						System.out.prinln("ENTROUUU");
+						break;
 					}
 
-					//Note: Use instance object to get IP Address directly from AWS API
+				}
 
-					//Obtain instance IP address
-					instanceIP = LoadBalancer.getInstanceIP(instanceID);					
-					System.out.println("Instance " + instanceID + "running with IP address " + instanceIP);					
+				// Enters if didn't find any free instance
+				if(instanceIP == null) {
 
+					// choose the right instance
+					// int countJobs = instanceMap.keys().count(instances.iterator().next().getPublicIpAddress());
+					boolean firstTime = true
+					int countJobs = 0;
+
+					for (Object key : instanceMap.keys()) { 
+
+						if(firstTime) {
+							countJobs = instanceMap.keys().count(key);
+							instanceIP = key;
+							firstTime = false;
+						
+						} else {
+
+							if(instanceMap.keys().count(key) < countJobs) {
+								System.out.prinln("ENTROUUU 2");					
+								instanceIP = key;
+							}
+						}	
+					}
 				}
 			}
 
@@ -511,7 +520,6 @@ public class LoadBalancer {
 
             for (Reservation reservation : reservations) {
                 instances.addAll(reservation.getInstances());
-                System.out.println(reservation.getInstances());
             }
 
             System.out.println("You have " + instances.size() + " Amazon EC2 instance(s) running.");            
