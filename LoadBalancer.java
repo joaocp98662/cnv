@@ -163,7 +163,7 @@ public class LoadBalancer {
 
 					// choose the right instance
 					// int countJobs = instanceMap.keys().count(instances.iterator().next().getPublicIpAddress());
-					boolean firstTime = true
+					boolean firstTime = true;
 					int countJobs = 0;
 
 					for (Object key : instanceMap.keys()) { 
