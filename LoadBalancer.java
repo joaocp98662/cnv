@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.InetSocketAddress;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
