@@ -143,29 +143,10 @@ public class LoadBalancer {
 
 			} else { /* instances running in AWS */
 
-
-				//Check if any of the AWS instances not exists in the HashMap of running instances. Free instance
-
-				// Iterator inst = instances.iterator();
-
-				// while(inst.hasNext()) {
-
-				// 	System.out.println(inst);
-  					
-					// if(instancesMap.get(inst.getPublicIpAddress().toString().equals("[]"))) {
-
-					// 	instanceIP = inst.getPublicIpAddress();
-					// 	System.out.println("ENTROUUU");
-					// 	break;
-					// }
-
-				// }
-
 				for (Instance inst : instances) {
-					System.out.println(inst.getPublicIpAddress());
 
 					if(instancesMap.get(inst.getPublicIpAddress()).toString().equals("[]")) {
-						
+
 						instanceIP = inst.getPublicIpAddress();
 						System.out.println("ENTROUUU");
 						break;
