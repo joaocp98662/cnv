@@ -488,7 +488,7 @@ public class LoadBalancer {
 
 		//init();
 
-		Set<Instance> instances = new HashSet<Instance>();
+		List<Instance> instances = new List<Instance>();
 
         try {         	
 
