@@ -117,7 +117,7 @@ public class LoadBalancer {
 			System.out.println("\nAMI ID - " + imageID);
 
 			// Get active instances
-			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID);
+			List<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID);
 
 			//System.out-println(instances.);
 
