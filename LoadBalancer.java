@@ -17,7 +17,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.InetSocketAddress;
 import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
@@ -325,8 +324,8 @@ public class LoadBalancer {
 				
 
 
-				String result = IOUtils.toString(response, StandardCharsets.UTF_8);
-				t.sendResponseHeaders(200, result.length());
+				String result = IOUtils.toString(response, "UTF-8");
+				t.sendResponseHeaders(200, result.length);
 				//t.sendResponseHeaders(200, response.available());
 
 				final OutputStream os = t.getResponseBody();
