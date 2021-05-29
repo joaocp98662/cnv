@@ -325,7 +325,7 @@ public class LoadBalancer {
 
 
 				String result = IOUtils.toString(response, "UTF-8");
-				t.sendResponseHeaders(200, result.length);
+				t.sendResponseHeaders(200, result.length());
 				//t.sendResponseHeaders(200, response.available());
 
 				final OutputStream os = t.getResponseBody();
