@@ -170,7 +170,7 @@ public class LoadBalancer {
 						} else {
 
 							if(instancesMap.keys().count(key) < countJobs) {
-								System.out.println("ENTROUUU 2");					
+								System.out.println("3ª Condition ... ");
 								instanceIP = key.toString();
 							}
 						}	
