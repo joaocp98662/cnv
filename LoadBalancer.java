@@ -184,7 +184,7 @@ public class LoadBalancer {
 
 			instancesMap.put(instanceIP, query);
 
-			System.out.println(instancesMap);
+			//System.out.println(instancesMap);
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
