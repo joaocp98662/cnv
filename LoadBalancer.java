@@ -322,7 +322,7 @@ public class LoadBalancer {
 				hdrs.add("Access-Control-Allow-Methods", "POST, GET, HEAD, OPTIONS");
 				hdrs.add("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 				
-				t.sendResponseHeaders(200, response.length());
+				t.sendResponseHeaders(200, response.getSize());
 
 				final OutputStream os = t.getResponseBody();
 
