@@ -149,13 +149,15 @@ public class LoadBalancer {
 				Iterator<Instance> inst = instances.iterator();
 
 				while(inst.hasNext()) {
-  					
-					if(instancesMap.get(inst.getPublicIpAddress().toString().equals("[]"))) {
 
-						instanceIP = inst.getPublicIpAddress();
-						System.out.println("ENTROUUU");
-						break;
-					}
+					System.out.println(inst);
+  					
+					// if(instancesMap.get(inst.getPublicIpAddress().toString().equals("[]"))) {
+
+					// 	instanceIP = inst.getPublicIpAddress();
+					// 	System.out.println("ENTROUUU");
+					// 	break;
+					// }
 
 				}
 
