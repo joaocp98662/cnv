@@ -487,11 +487,11 @@ public class LoadBalancer {
         try {         	
 
             //Create Filters to use to find running instances
-            // Filter filterEC2ByImageId = new Filter("image-id");
-            // filterEC2ByImageId.withValues(imageID);
+            Filter filterEC2ByImageId = new Filter("image-id");
+            filterEC2ByImageId.withValues(imageID);
 
-            // Filter filterEC2ByinstanceType = new Filter("instance-type");
-            // filterEC2ByinstanceType.withValues("t2.micro");
+            Filter filterEC2ByinstanceType = new Filter("instance-type");
+            filterEC2ByinstanceType.withValues("t2.micro");
 
             Filter filterEC2ByState = new Filter("instance-state-name");
             filterEC2ByState.withValues("running");
@@ -500,8 +500,7 @@ public class LoadBalancer {
             // filterLBInstance.withValues("!" + loadBalancerInstanceID);
 
 			DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
-			// describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState, filterLBInstance);
-			describeInstancesRequest.withFilters(filterEC2ByState);
+			describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState/*, filterLBInstance*/);
 
 			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);
 
