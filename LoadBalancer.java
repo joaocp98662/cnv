@@ -157,7 +157,6 @@ public class LoadBalancer {
 				if(instanceIP == null) {
 
 					// choose the right instance
-					// int countJobs = instanceMap.keys().count(instances.iterator().next().getPublicIpAddress());
 					boolean firstTime = true;
 					int countJobs = 0;
 
