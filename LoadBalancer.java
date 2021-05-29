@@ -148,7 +148,7 @@ public class LoadBalancer {
 					if(instancesMap.get(inst.getPublicIpAddress()).toString().equals("[]")) {
 
 						instanceIP = inst.getPublicIpAddress();
-						System.out.println("ENTROUUU");
+						System.out.println("2º Condition - Sent request to a free instance with IP " + instanceIP);
 						break;
 					}
 				}
