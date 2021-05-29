@@ -506,10 +506,9 @@ public class LoadBalancer {
 
             List<Reservation> reservations = describeInstancesResult.getReservations();
 
-            System.out.println(reservation.getInstances());
-
             for (Reservation reservation : reservations) {
                 instances.addAll(reservation.getInstances());
+                System.out.println(reservation.getInstances());
             }
 
             System.out.println("You have " + instances.size() + " Amazon EC2 instance(s) running.");            
