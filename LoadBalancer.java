@@ -147,11 +147,11 @@ public class LoadBalancer {
 
 					//Send the request to one of the free instances
 
-					List<String> instancesList = new ArrayList<>(instances);
+					Instance instance = instances.iterator().next();
 
 
-					instanceIP = instancesList.get(0).getPublicIpAddress();
-					System.out.println(instancesList.get(0).getInstanceId());
+					instanceIP = instance.getPublicIpAddress();
+					System.out.println(instance.getInstanceId());
 
 					//Note: Correct startInstance method to return an instance object
 
