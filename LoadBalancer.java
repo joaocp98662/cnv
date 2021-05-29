@@ -162,7 +162,7 @@ public class LoadBalancer {
 				// }
 
 				for (Instance inst : instances) {
-						System.out.println("inst");
+						System.out.println(inst);
 				}
 
 				// Enters if didn't find any free instance
@@ -204,7 +204,7 @@ public class LoadBalancer {
 			// Updates instanceMap of queries/instances running
 			instancesMap.remove(instanceIP, query);
 
-			System.out.println(instancesMap);
+			//System.out.println(instancesMap);
 
 			return response;
 
