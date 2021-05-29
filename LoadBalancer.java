@@ -66,8 +66,6 @@ public class LoadBalancer {
 	// Multimap declaration
 	private static Multimap<String, String> instancesMap = ArrayListMultimap.create();
 
-	//final String loadBalancerInstanceID = "i-0a09f4bafad648ec8";
-
 	//private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
 	public static void main(final String[] args) throws Exception {
@@ -103,8 +101,6 @@ public class LoadBalancer {
 
 		try {
 
-			String loadBalancerInstanceID = "i-0a09f4bafad648ec8";
-
 			// Get imageID
 
 			Filter filterImageByName = new Filter("name");
@@ -121,7 +117,7 @@ public class LoadBalancer {
 			System.out.println("\nAMI ID - " + imageID);
 
 			// Get active instances
-			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID, loadBalancerInstanceID);
+			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID);
 
 			//System.out-println(instances.);
 
@@ -149,6 +145,15 @@ public class LoadBalancer {
 				// check if there are instances running that are free (not running queries)
 				if(instancesMap.isEmpty()) {
 
+					//Send the request to one of the free instances
+
+					instanceIP = instances.get(0).getPublicIpAddress();
+					System.out.println(instances.get(0).getInstanceId());
+
+					//Note: Correct startInstance method to return an instance object
+
+				} else {
+
 					// Start an instance - Auto Scaler
 					String instanceID = LoadBalancer.startInstance(imageID);
 					System.out.println("Starting a new instance with ID " + instanceID + "...");
@@ -158,13 +163,11 @@ public class LoadBalancer {
 						Thread.sleep(500);
 					}
 
+					//Note: Use instance object to get IP Address directly from AWS API
+
 					//Obtain instance IP address
 					instanceIP = LoadBalancer.getInstanceIP(instanceID);					
-					System.out.println("Instance " + instanceID + "running with IP address " + instanceIP);
-
-				} else {
-
-					System.out.println("Else");
+					System.out.println("Instance " + instanceID + "running with IP address " + instanceIP);					
 
 				}
 			}
@@ -478,7 +481,7 @@ public class LoadBalancer {
         return instanceRunning;
 	}	
 
-	public static synchronized Set<Instance> listRunningInstancesByImageID(String imageID, String loadBalancerInstanceID) throws Exception {
+	public static synchronized Set<Instance> listRunningInstancesByImageID(String imageID) throws Exception {
 
 		//init();
 
@@ -496,11 +499,8 @@ public class LoadBalancer {
             Filter filterEC2ByState = new Filter("instance-state-name");
             filterEC2ByState.withValues("running");
 
-            // Filter filterLBInstance = new Filter("instance-id");
-            // filterLBInstance.withValues("!" + loadBalancerInstanceID);
-
 			DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
-			describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState/*, filterLBInstance*/);
+			describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState);
 
 			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);
 
