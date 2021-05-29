@@ -488,7 +488,7 @@ public class LoadBalancer {
 
 		//init();
 
-		List<Instance> instances = new List<Instance>();
+		List<Instance> instances;
 
         try {         	
 
