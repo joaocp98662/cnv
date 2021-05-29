@@ -493,14 +493,15 @@ public class LoadBalancer {
             // Filter filterEC2ByinstanceType = new Filter("instance-type");
             // filterEC2ByinstanceType.withValues("t2.micro");
 
-            // Filter filterEC2ByState = new Filter("instance-state-name");
-            // filterEC2ByState.withValues("running");
+            Filter filterEC2ByState = new Filter("instance-state-name");
+            filterEC2ByState.withValues("running");
 
             // Filter filterLBInstance = new Filter("instance-id");
             // filterLBInstance.withValues("!" + loadBalancerInstanceID);
 
 			DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
 			// describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState, filterLBInstance);
+			describeInstancesRequest.withFilters(filterEC2ByState);
 
 			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);
 
