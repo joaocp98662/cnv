@@ -323,10 +323,11 @@ public class LoadBalancer {
 				hdrs.add("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 				
 
+				byte[] bytes = IOUtils.toByteArray(response);
 
-				String result = IOUtils.toString(response, "UTF-8");
-				t.sendResponseHeaders(200, result.length());
 				//t.sendResponseHeaders(200, response.available());
+
+				t.sendResponseHeaders(200, bytes.length);
 
 				final OutputStream os = t.getResponseBody();
 
