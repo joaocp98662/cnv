@@ -163,7 +163,7 @@ public class LoadBalancer {
 
 				for (Instance inst : instances) {
 
-					if(instancesMap.get(inst.getPublicIpAddress().equals("[]"))) {
+					if(instancesMap.get((inst.getPublicIpAddress()).equals("[]"))) {
 
 						instanceIP = inst.getPublicIpAddress();
 						System.out.println("ENTROUUU");
