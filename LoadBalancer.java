@@ -184,14 +184,14 @@ public class LoadBalancer {
 
 			instancesMap.put(instanceIP, query);
 
-			//System.out.println(instancesMap);
+			System.out.println("BEFORE " + instancesMap);
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
 			// Updates instanceMap of queries/instances running
 			instancesMap.remove(instanceIP, query);
 
-			//System.out.println(instancesMap);
+			System.out.println("AFTER " + instancesMap);
 
 			return response;
 
