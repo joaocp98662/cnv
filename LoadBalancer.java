@@ -170,7 +170,7 @@ public class LoadBalancer {
 
 						if(firstTime) {
 							countJobs = instanceMap.keys().count(key);
-							instanceIP = key;
+							instanceIP = key.toString();
 							firstTime = false;
 						
 						} else {
