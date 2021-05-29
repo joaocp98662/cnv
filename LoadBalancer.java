@@ -506,10 +506,9 @@ public class LoadBalancer {
 
             List<Reservation> reservations = describeInstancesResult.getReservations();
 
-            System.out.println("Entrou 509");
+            System.out.println(reservation.getInstances());
 
             for (Reservation reservation : reservations) {
-            	System.out.println("Entrou 512");
                 instances.addAll(reservation.getInstances());
             }
 
