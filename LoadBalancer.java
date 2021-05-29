@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.Executors;
+import java.util.Iterator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -175,7 +176,7 @@ public class LoadBalancer {
 						
 						} else {
 
-							if(instanceMap.keys().count(key) < countJobs) {
+							if(instancesMap.keys().count(key) < countJobs) {
 								System.out.println("ENTROUUU 2");					
 								instanceIP = key.toString();
 							}
