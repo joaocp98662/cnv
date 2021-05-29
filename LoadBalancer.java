@@ -152,7 +152,7 @@ public class LoadBalancer {
 					if(instancesMap.get(inst.getPublicIpAddress().toString().equals("[]"))) {
 
 						instanceIP = inst.getPublicIpAddress();
-						System.out.prinln("ENTROUUU");
+						System.out.println("ENTROUUU");
 						break;
 					}
 
@@ -166,10 +166,10 @@ public class LoadBalancer {
 					boolean firstTime = true;
 					int countJobs = 0;
 
-					for (Object key : instanceMap.keys()) { 
+					for (Object key : instancesMap.keys()) { 
 
 						if(firstTime) {
-							countJobs = instanceMap.keys().count(key);
+							countJobs = instancesMap.keys().count(key);
 							instanceIP = key.toString();
 							firstTime = false;
 						
