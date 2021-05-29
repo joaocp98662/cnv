@@ -117,7 +117,7 @@ public class LoadBalancer {
 			System.out.println("\nAMI ID - " + imageID);
 
 			// Get active instances
-			List<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID);
+			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID);
 
 			//System.out-println(instances.);
 
@@ -147,11 +147,11 @@ public class LoadBalancer {
 
 					//Send the request to one of the free instances
 
-					//List<String> stringsList = new ArrayList<>(stringsSet);
+					List<String> instancesList = new ArrayList<>(instances);
 
 
-					instanceIP = instances.get(0).getPublicIpAddress();
-					System.out.println(instances.get(0).getInstanceId());
+					instanceIP = instancesList.get(0).getPublicIpAddress();
+					System.out.println(instancesList.get(0).getInstanceId());
 
 					//Note: Correct startInstance method to return an instance object
 
