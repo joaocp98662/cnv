@@ -147,11 +147,11 @@ public class LoadBalancer {
 
 					//Send the request to one of the free instances
 
-					List<String> instancesList = new ArrayList<>(instances);
+					//List<String> instancesList = new ArrayList<>(instances);
 
 
-					instanceIP = instancesList.get(0).getPublicIpAddress();
-					System.out.println(instancesList.get(0).getInstanceId());
+					instanceIP = instances.get(0).getPublicIpAddress();
+					System.out.println(instances.get(0).getInstanceId());
 
 					//Note: Correct startInstance method to return an instance object
 
@@ -484,7 +484,7 @@ public class LoadBalancer {
         return instanceRunning;
 	}	
 
-	public static synchronized Set<Instance> listRunningInstancesByImageID(String imageID) throws Exception {
+	public static synchronized List<Instance> listRunningInstancesByImageID(String imageID) throws Exception {
 
 		//init();
 
