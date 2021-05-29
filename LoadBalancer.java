@@ -162,13 +162,7 @@ public class LoadBalancer {
 				// }
 
 				for (Instance inst : instances) {
-					
-					if(instancesMap.get(inst.getPublicIpAddress().toString().equals("[]"))) {
-
-						instanceIP = inst.getPublicIpAddress();
-						System.out.println("ENTROUUU");
-						break;
-					}
+						System.out.println("inst");
 				}
 
 				// Enters if didn't find any free instance
