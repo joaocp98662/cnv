@@ -66,6 +66,8 @@ public class LoadBalancer {
 	// Multimap declaration
 	private static Multimap<String, String> instancesMap = ArrayListMultimap.create();
 
+	//final String loadBalancerInstanceID = "i-0a09f4bafad648ec8";
+
 	//private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
 	public static void main(final String[] args) throws Exception {
@@ -101,7 +103,7 @@ public class LoadBalancer {
 
 		try {
 
-			String loadBalancerInstanceID = "i-0c00cdd434dc41bca";
+			String loadBalancerInstanceID = "i-0a09f4bafad648ec8";
 
 			// Get imageID
 
@@ -491,14 +493,14 @@ public class LoadBalancer {
             Filter filterEC2ByinstanceType = new Filter("instance-type");
             filterEC2ByinstanceType.withValues("t2.micro");
 
-            Filter filterEC2ByState = new Filter("instance-state-name");
-            filterEC2ByState.withValues("running");
+            //Filter filterEC2ByState = new Filter("instance-state-name");
+            //filterEC2ByState.withValues("running");
 
             Filter filterLBInstance = new Filter("instance-id");
             filterLBInstance.withValues("!" + loadBalancerInstanceID);
 
 			DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
-			describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType, filterEC2ByState, filterLBInstance);
+			describeInstancesRequest.withFilters(filterEC2ByImageId, filterEC2ByinstanceType,/*filterEC2ByState,*/ filterLBInstance);
 
 			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);
 
