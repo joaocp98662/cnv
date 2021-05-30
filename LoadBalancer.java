@@ -67,6 +67,7 @@ public class LoadBalancer {
 
 	// Multimap declaration
 	private static Multimap<String, String> instancesMap = ArrayListMultimap.create();
+	private static boolean startingNewInstance = false;
 
 	//private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
@@ -125,8 +126,13 @@ public class LoadBalancer {
 
 			String instanceIP = null;
 
+			while(startingNewInstance)
+				Thread.sleep(200);
+
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
+
+				startingNewInstance = true;
 
 				// Start an instance - Auto Scaler
 				String instanceID = LoadBalancer.startInstance(imageID);
@@ -137,9 +143,11 @@ public class LoadBalancer {
 					Thread.sleep(500);					
 				}
 
+				startingNewInstance = false;
+
 				//Obtain instance IP address
 				instanceIP = LoadBalancer.getInstanceIP(instanceID);
-				System.out.println("Instance " + instanceID + "running with IP address " + instanceIP);
+				System.out.println("Instance " + instanceID + "running with IP address " + instanceIP);				
 
 
 			} else { /* instances running in AWS */
@@ -147,7 +155,6 @@ public class LoadBalancer {
 				for (Instance inst : instances) {
 
 					if(instancesMap.get(inst.getPublicIpAddress()).toString().equals("[]")) {
-						System.out.println("TESTE - " + instancesMap.get(inst.getPublicIpAddress()));
 						instanceIP = inst.getPublicIpAddress();
 						System.out.println("2º Condition - Sent request to a free instance with IP " + instanceIP);
 						break;
@@ -184,15 +191,14 @@ public class LoadBalancer {
 
 			System.out.println("Request will be send to " + instanceIP);
 
-			//TODO Hasmap-->    ip_instance and list of queries
-
+			// Updates Map only if is not a new Instance
 			instancesMap.put(instanceIP, query);
 
 			System.out.println("BEFORE " + instancesMap);
 
 			InputStream response = LoadBalancer.sendRequestToInstance(instanceIP, query);
 
-			// Updates instanceMap of queries/instances running
+			// Updates instanceMap of queries/instances running			
 			instancesMap.remove(instanceIP, query);
 
 			System.out.println("AFTER " + instancesMap);
@@ -205,9 +211,11 @@ public class LoadBalancer {
             // System.out.println("Reponse Status Code: " + ase.getStatusCode());
             // System.out.println("Error Code: " + ase.getErrorCode());
             // System.out.println("Request ID: " + ase.getRequestId());
+            instancesMap.remove(instanceIP, query);
             throw new AmazonServiceException(ase.getMessage());
         }
 		catch (IOException e) {
+			instancesMap.remove(instanceIP, query);
 			throw new IOException(e.getMessage());
         }
         
