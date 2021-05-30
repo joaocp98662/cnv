@@ -166,6 +166,7 @@ public class LoadBalancer {
 					for (Object key : instancesMap.keys()) { 
 
 						if(firstTime) {
+							System.out.println("ENTROU 2!!!");
 							countJobs = instancesMap.keys().count(key);
 							instanceIP = key.toString();
 							firstTime = false;
