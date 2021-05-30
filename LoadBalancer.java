@@ -97,7 +97,7 @@ public class LoadBalancer {
 	}
 
 
-	public static synchronized InputStream manageWorkLoad(String query) throws Exception {
+	public static InputStream manageWorkLoad(String query) throws Exception {
 
 		init();
 
@@ -505,7 +505,7 @@ public class LoadBalancer {
         return instanceRunning;
 	}	
 
-	public static synchronized Set<Instance> listRunningInstancesByImageID(String imageID) throws Exception {
+	public static Set<Instance> listRunningInstancesByImageID(String imageID) throws Exception {
 
 		//init();
 
