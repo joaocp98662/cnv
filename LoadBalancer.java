@@ -98,7 +98,7 @@ public class LoadBalancer {
 	}
 
 
-	public static InputStream manageWorkLoad(String query) throws Exception {
+	public static synchronized InputStream manageWorkLoad(String query) throws Exception {
 
 		init();
 
