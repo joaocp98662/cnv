@@ -121,6 +121,8 @@ public class LoadBalancer {
 			
 			System.out.println("\nAMI ID - " + imageID);
 
+			sem.acquire();
+
 			// Get active instances
 			Set<Instance> instances = LoadBalancer.listRunningInstancesByImageID(imageID);
 
@@ -132,8 +134,6 @@ public class LoadBalancer {
 			// 	System.out.println("ENTROU AQUI!!!!!!!!!");
 			// 	Thread.sleep(200);
 			// }
-
-			sem.acquire();
 
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
