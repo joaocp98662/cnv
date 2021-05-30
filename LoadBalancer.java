@@ -323,9 +323,6 @@ public class LoadBalancer {
 				hdrs.add("Access-Control-Allow-Methods", "POST, GET, HEAD, OPTIONS");
 				hdrs.add("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
-
-	            // first send header, than response body, if any
-	            // use default buffer size suited for your use case
 	            final byte[] buffer = new byte[response.available() == 0 ? 1024 : response.available()];
 	            System.out.println("buffer size=" + buffer.length);
 
@@ -350,7 +347,7 @@ public class LoadBalancer {
 				// // Copy response to OutputStream
 				// IOUtils.copy(response, os);		
 
-				// os.close();
+				os.close();
 
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
