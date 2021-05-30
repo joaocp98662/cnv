@@ -347,7 +347,7 @@ public class LoadBalancer {
 				// // Copy response to OutputStream
 				// IOUtils.copy(response, os);		
 
-				os.close();
+				//os.close();
 
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
