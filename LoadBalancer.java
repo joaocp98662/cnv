@@ -126,8 +126,10 @@ public class LoadBalancer {
 
 			String instanceIP = null;
 
-			while(startingNewInstance)
+			while(startingNewInstance) {
+				System.out.println("ENTROU AQUI!!!!!!!!!");
 				Thread.sleep(200);
+			}
 
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
