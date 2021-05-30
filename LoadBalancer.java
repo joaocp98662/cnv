@@ -213,11 +213,11 @@ public class LoadBalancer {
             // System.out.println("Reponse Status Code: " + ase.getStatusCode());
             // System.out.println("Error Code: " + ase.getErrorCode());
             // System.out.println("Request ID: " + ase.getRequestId());
-            instancesMap.remove(instanceIP, query);
+            //instancesMap.remove(instanceIP, query); TOOOOOOOOOOOOOOO CHECKKKKKKKKKKKKKKK!!!!!!!
             throw new AmazonServiceException(ase.getMessage());
         }
 		catch (IOException e) {
-			instancesMap.remove(instanceIP, query);
+			//instancesMap.remove(instanceIP, query); TOOOOOOOOOOOOOOO CHECKKKKKKKKKKKKKKK!!!!!!! 
 			throw new IOException(e.getMessage());
         }
         
