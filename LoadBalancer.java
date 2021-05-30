@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.Iterator;
 
 import java.io.IOException;
@@ -67,6 +68,7 @@ public class LoadBalancer {
 
 	// Multimap declaration
 	private static Multimap<String, String> instancesMap = ArrayListMultimap.create();
+	Semaphore sem;
 	//private volatile boolean startingNewInstance = false;
 
 	//private static HashMap<String, String> instancesMap = new HashMap<String, String>();
@@ -131,6 +133,8 @@ public class LoadBalancer {
 			// 	Thread.sleep(200);
 			// }
 
+			sem.acquire();
+
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
 
@@ -146,6 +150,7 @@ public class LoadBalancer {
 				}
 
 				//startingNewInstance = false;
+				sem.release();
 
 				//Obtain instance IP address
 				instanceIP = LoadBalancer.getInstanceIP(instanceID);
@@ -153,6 +158,8 @@ public class LoadBalancer {
 
 
 			} else { /* instances running in AWS */
+
+				sem.release();
 
 				for (Instance inst : instances) {
 
