@@ -157,6 +157,8 @@ public class LoadBalancer {
 				// Enters if didn't find any free instance
 				if(instanceIP == null) {
 
+					System.out.println("ENTROU CARAGO!!!");
+
 					// choose the right instance
 					boolean firstTime = true;
 					int countJobs = 0;
