@@ -67,7 +67,7 @@ public class LoadBalancer {
 
 	// Multimap declaration
 	private static Multimap<String, String> instancesMap = ArrayListMultimap.create();
-	private static boolean startingNewInstance = false;
+	private volatile boolean startingNewInstance = false;
 
 	//private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
