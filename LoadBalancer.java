@@ -67,7 +67,7 @@ public class LoadBalancer {
 
 	// Multimap declaration
 	private static Multimap<String, String> instancesMap = ArrayListMultimap.create();
-	private volatile boolean startingNewInstance = false;
+	//private volatile boolean startingNewInstance = false;
 
 	//private static HashMap<String, String> instancesMap = new HashMap<String, String>();
 
@@ -98,7 +98,7 @@ public class LoadBalancer {
 	}
 
 
-	public static synchronized InputStream manageWorkLoad(String query) throws Exception {
+	public static InputStream manageWorkLoad(String query) throws Exception {
 
 		init();
 
@@ -134,7 +134,7 @@ public class LoadBalancer {
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
 
-				// startingNewInstance = true;
+				startingNewInstance = true;
 
 				// Start an instance - Auto Scaler
 				String instanceID = LoadBalancer.startInstance(imageID);
@@ -145,7 +145,7 @@ public class LoadBalancer {
 					Thread.sleep(500);					
 				}
 
-				// startingNewInstance = false;
+				//startingNewInstance = false;
 
 				//Obtain instance IP address
 				instanceIP = LoadBalancer.getInstanceIP(instanceID);
