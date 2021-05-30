@@ -126,15 +126,15 @@ public class LoadBalancer {
 
 			String instanceIP = null;
 
-			while(startingNewInstance) {
-				System.out.println("ENTROU AQUI!!!!!!!!!");
-				Thread.sleep(200);
-			}
+			// while(startingNewInstance) {
+			// 	System.out.println("ENTROU AQUI!!!!!!!!!");
+			// 	Thread.sleep(200);
+			// }
 
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
 
-				startingNewInstance = true;
+				// startingNewInstance = true;
 
 				// Start an instance - Auto Scaler
 				String instanceID = LoadBalancer.startInstance(imageID);
@@ -145,7 +145,7 @@ public class LoadBalancer {
 					Thread.sleep(500);					
 				}
 
-				startingNewInstance = false;
+				// startingNewInstance = false;
 
 				//Obtain instance IP address
 				instanceIP = LoadBalancer.getInstanceIP(instanceID);
