@@ -134,7 +134,7 @@ public class LoadBalancer {
 			// Check if there are no instances running
 			if(instances.isEmpty()) {
 
-				startingNewInstance = true;
+				//startingNewInstance = true;
 
 				// Start an instance - Auto Scaler
 				String instanceID = LoadBalancer.startInstance(imageID);
