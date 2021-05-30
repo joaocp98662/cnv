@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 import java.net.URL;
 import java.net.InetSocketAddress;
 import java.net.HttpURLConnection;
@@ -321,20 +322,35 @@ public class LoadBalancer {
 				hdrs.add("Access-Control-Allow-Credentials", "true");
 				hdrs.add("Access-Control-Allow-Methods", "POST, GET, HEAD, OPTIONS");
 				hdrs.add("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+
+
+	            // first send header, than response body, if any
+	            // use default buffer size suited for your use case
+	            final byte[] buffer = new byte[response.available() == 0 ? 1024 : response.available()];
+	            System.out.println("buffer size=" + buffer.length);
+
+
+	            final ByteArrayOutputStream baos = new ByteArrayOutputStream(buffer.length);
+	            int length;
+
+	            while ((length = response.read(buffer, 0, buffer.length)) >= 0) {
+	                baos.write(buffer, 0, length);
+	            }
+
+	            t.sendResponseHeaders(200, baos.size());
+
+	            final OutputStream os = t.getResponseBody();
+
+	            baos.writeTo(os);	
 				
+				// t.sendResponseHeaders(200, response.available());
 
-				byte[] bytes = IOUtils.toByteArray(response);
+				// final OutputStream os = t.getResponseBody();
 
-				//t.sendResponseHeaders(200, response.available());
+				// // Copy response to OutputStream
+				// IOUtils.copy(response, os);		
 
-				t.sendResponseHeaders(200, bytes.length);
-
-				final OutputStream os = t.getResponseBody();
-
-				// Copy response to OutputStream
-				IOUtils.copy(response, os);		
-
-				os.close();
+				// os.close();
 
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
