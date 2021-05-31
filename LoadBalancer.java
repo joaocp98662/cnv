@@ -126,23 +126,16 @@ public class LoadBalancer {
 			//     System.out.println("AREA = " + area);
 			// }						
 
-			for (JSONObject metric : metrics) {
-				//x.add(Double.parseDouble(metric.get("area").toString()));
-				//y.add(Double.parseDouble(metric.get("instr_count").toString()));
-				System.out.println("AREA - " + metric.get("area").toString());
-				System.out.println("INSTR - " + metric.get("instr_count").toString());
+			Iterator<JSONObject> metricsIterator =  metrics.iterator();
+
+			 while(metricsIterator.hasNext()) {
+
+		        JSONObject item = metricsIterator.next();
+		        // x.add(Double.parseDouble(item.get("area").toString()));
+		        // y.add(Double.parseDouble(item.get("instr_count").toString()));
+		        System.out.println("AREA - " + item.get("area"));
+				System.out.println("INSTR - " + item.get("instr_count"));
 			}
-
-			// Iterator<JSONObject> metricsIterator =  metrics.iterator();
-
-			//  while(metricsIterator.hasNext()) {
-
-		 //        JSONObject item = metricsIterator.next();
-		 //        // x.add(Double.parseDouble(item.get("area").toString()));
-		 //        // y.add(Double.parseDouble(item.get("instr_count").toString()));
-		 //        System.out.println("AREA - " + item.get("area"));
-			// 	System.out.println("INSTR - " + item.get("instr_count"));
-			// }
 
 			// System.out.println("X - " + x);
 			// System.out.println("Y - " + y);
