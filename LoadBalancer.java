@@ -215,9 +215,9 @@ public class LoadBalancer {
 					boolean firstTime = true;
 
 					outerloop:
-		 			for (Object key : instanceMap.keySet()) { 
+		 			for (Object key : instancesMap.keySet()) { 
 
-		 				for(String instanceQueryRequest : instanceMap.get(key.toString())) {
+		 				for(String instanceQueryRequest : instancesMap.get(key.toString())) {
 		 					
 		 					predictionInstr = LoadBalancer.getPredictedInstrunctions(instanceQueryRequest);
 
