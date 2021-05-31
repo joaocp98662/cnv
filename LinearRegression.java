@@ -33,12 +33,12 @@ public class LinearRegression {
     private final double svar, svar0, svar1;
 
    /**
-     * Performs a linear regression on the data points <tt>(y[i], x[i])</tt>.
+     * Performs a linear regression on the data points <tt>(y.get(i), x.get(i))</tt>.
      * @param x the values of the predictor variable
      * @param y the corresponding values of the response variable
      * @throws java.lang.IllegalArgumentException if the lengths of the two arrays are not equal
      */
-    public LinearRegression(double[] x, double[] y) {
+    public LinearRegression(List<Double> x, List<Double> y) {
         if (x.length != y.length) {
             throw new IllegalArgumentException("array lengths are not equal");
         }
@@ -46,18 +46,18 @@ public class LinearRegression {
 
         // first pass
         double sumx = 0.0, sumy = 0.0, sumx2 = 0.0;
-        for (int i = 0; i < N; i++) sumx  += x[i];
-        for (int i = 0; i < N; i++) sumx2 += x[i]*x[i];
-        for (int i = 0; i < N; i++) sumy  += y[i];
+        for (int i = 0; i < N; i++) sumx  += x.get(i);
+        for (int i = 0; i < N; i++) sumx2 += x.get(i)*x.get(i);
+        for (int i = 0; i < N; i++) sumy  += y.get(i);
         double xbar = sumx / N;
         double ybar = sumy / N;
 
         // second pass: compute summary statistics
         double xxbar = 0.0, yybar = 0.0, xybar = 0.0;
         for (int i = 0; i < N; i++) {
-            xxbar += (x[i] - xbar) * (x[i] - xbar);
-            yybar += (y[i] - ybar) * (y[i] - ybar);
-            xybar += (x[i] - xbar) * (y[i] - ybar);
+            xxbar += (x.get(i) - xbar) * (x.get(i) - xbar);
+            yybar += (y.get(i) - ybar) * (y.get(i) - ybar);
+            xybar += (x.get(i) - xbar) * (y.get(i) - ybar);
         }
         beta  = xybar / xxbar;
         alpha = ybar - beta * xbar;
@@ -66,8 +66,8 @@ public class LinearRegression {
         double rss = 0.0;      // residual sum of squares
         double ssr = 0.0;      // regression sum of squares
         for (int i = 0; i < N; i++) {
-            double fit = beta*x[i] + alpha;
-            rss += (fit - y[i]) * (fit - y[i]);
+            double fit = beta*x.get(i) + alpha;
+            rss += (fit - y.get(i)) * (fit - y.get(i));
             ssr += (fit - ybar) * (fit - ybar);
         }
 

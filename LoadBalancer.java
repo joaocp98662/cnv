@@ -110,8 +110,8 @@ public class LoadBalancer {
 
 			JSONArray metrics = DataBase.getDataForPrediction("metrics", args[1], args[17]);
 			
-			// List<Double> x = new ArrayList<Double>();
-			// List<Double> y = new ArrayList<Double>();
+			List<Double> x = new ArrayList<Double>();
+			List<Double> y = new ArrayList<Double>();
 
 			System.out.println(metrics.toString());
 
@@ -130,8 +130,6 @@ public class LoadBalancer {
 
 			int index = 0;
 
-			double[] x;
-			double[] y;
 
 			while(metricsIterator.hasNext()) {
 
@@ -139,10 +137,8 @@ public class LoadBalancer {
 
 		        if(item.get("area") != null)
 					//x.add(Double.parseDouble(item.get("area").toString()));
-					x[index] = Double.parseDouble(item.get("area").toString());
 				if(item.get("instr_count") != null)
 					//y.add(Double.parseDouble(item.get("instr_count").toString()));
-					y[index] = Double.parseDouble(item.get("instr_count").toString());
 
 		  //       System.out.println("AREA - " + item.get("area"));
 				// System.out.println("INSTR - " + item.get("instr_count"));
