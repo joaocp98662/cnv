@@ -144,7 +144,7 @@ public class LoadBalancer {
 			System.out.println("X - " + x);
 			System.out.println("Y - " + y);
 
-			double area = (args[7] - args[5]) * (args[11] - args[9]);
+			double area = (Double.parseDouble(args[7]) - Double.parseDouble(args[5])) * (Double.parseDouble(args[11]) - Double.parseDouble(args[9]));
 
 			//LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
 			LinearRegression lr = new LinearRegression(x.toArray(), y.toArray());
