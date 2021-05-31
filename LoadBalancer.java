@@ -195,19 +195,19 @@ public class LoadBalancer {
 
 					System.out.println("ENTROU CARAGO!!!");
 
-					double totalInstructions = 0;
+					// double totalInstructions = 0;
 
-					for (Object key : instancesMap.keys()) { 
+					// for (Object key : instancesMap.keys()) { 
 
-						for(String query : instancesMap.get(key)) {
+					// 	for(String query : instancesMap.get(key)) {
 
-							System.out.println("QUERY INSIDE - " + )
+					// 		System.out.println("QUERY INSIDE - " + )
 
-						}
+					// 	}
 
-						//totalInstructions += LoadBalancer.getPredictedInstrunctions()
+					// 	//totalInstructions += LoadBalancer.getPredictedInstrunctions()
 		
-					}					
+					// }					
 
 					// choose the right instance
 					boolean firstTime = true;
