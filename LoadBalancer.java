@@ -108,52 +108,6 @@ public class LoadBalancer {
 
 		try {
 
-			JSONArray metrics = DataBase.getDataForPrediction("metrics", args[1], args[17]);
-			
-			List<Double> x = new ArrayList<Double>();
-			List<Double> y = new ArrayList<Double>();
-
-			System.out.println(metrics.toString());
-
-			System.out.println("TESTEEEEE");
-
-			// for (int i = 0; i < metrics.size(); i++) {
-
-			//     JSONObject metric = (JSONObject) metrics.get(i);
-			//     String area = (String) metric.get("area");
-
-			//     // Number value = (Number) perf.get("value");
-			//     System.out.println("AREA = " + area);
-			// }						
-
-			Iterator<JSONObject> metricsIterator =  metrics.iterator();
-
-			int index = 0;
-
-
-			while(metricsIterator.hasNext()) {
-
-		        JSONObject item = metricsIterator.next();
-
-		        if(item.get("area") != null)
-					x.add(Double.parseDouble(item.get("area").toString()));
-				if(item.get("instr_count") != null)
-					y.add(Double.parseDouble(item.get("instr_count").toString()));
-
-		  //       System.out.println("AREA - " + item.get("area"));
-				// System.out.println("INSTR - " + item.get("instr_count"));
-			}
-
-			System.out.println("X - " + x);
-			System.out.println("Y - " + y);
-
-			double area = (Double.parseDouble(args[7]) - Double.parseDouble(args[5])) * (Double.parseDouble(args[11]) - Double.parseDouble(args[9]));
-
-			//LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
-			LinearRegression lr = new LinearRegression(x, y);
-
-			System.out.println("Prediction - " + lr.predict(area));
-
 			// Get imageID
 
 			Filter filterImageByName = new Filter("name");
@@ -287,6 +241,42 @@ public class LoadBalancer {
 			throw new IOException(e.getMessage());
         }
         
+	}
+
+	private static double getPredictedInstrunctions(String w, String[] args) {
+
+		JSONArray metrics = DataBase.getDataForPrediction("metrics", args);
+		
+		List<Double> x = new ArrayList<Double>();
+		List<Double> y = new ArrayList<Double>();
+
+		//System.out.println(metrics.toString());						
+
+		Iterator<JSONObject> metricsIterator =  metrics.iterator();
+
+		int index = 0;
+
+
+		while(metricsIterator.hasNext()) {
+
+	        JSONObject item = metricsIterator.next();
+
+	        if(item.get("area") != null)
+				x.add(Double.parseDouble(item.get("area").toString()));
+			if(item.get("instr_count") != null)
+				y.add(Double.parseDouble(item.get("instr_count").toString()));
+		}
+
+		// System.out.println("X - " + x);
+		// System.out.println("Y - " + y);
+
+		double area = (Double.parseDouble(args[7]) - Double.parseDouble(args[5])) * (Double.parseDouble(args[11]) - Double.parseDouble(args[9]));
+
+		LinearRegression lr = new LinearRegression(x, y);
+
+		//System.out.println("Prediction - " + lr.predict(area));
+
+		return lr.predict(area);
 	}
 
 	public static InputStream sendRequestToInstance(String instanceIP, String query) throws IOException {
