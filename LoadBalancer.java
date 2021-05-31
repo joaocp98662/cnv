@@ -106,9 +106,20 @@ public class LoadBalancer {
 
 		init();
 
-		try {
+		try {			
 
-			System.out.println(LoadBalancer.getPredictedInstrunctions(query));
+			Multimap<String, String> testeMap = ArrayListMultimap.create();
+
+ 			testeMap.put("127.1.0.0", "1");
+ 			testeMap.put("127.1.0.0", "2");
+ 			testeMap.put("127.1.0.0", "3");			
+
+ 			for (Object key : testeMap.keys()) { 
+
+ 				System.out.println(testeMap.get(key.toString()));
+ 				//totalInstructions += LoadBalancer.getPredictedInstrunctions()
+
+ 			}			
 
 			// Get imageID
 
@@ -185,7 +196,9 @@ public class LoadBalancer {
 
 
 		
-					// }					
+					// }
+
+					System.out.println(LoadBalancer.getPredictedInstrunctions(query));
 
 					// choose the right instance
 					boolean firstTime = true;
