@@ -323,7 +323,7 @@ public class LoadBalancer {
 					y.add(Double.parseDouble(item.get("instr_count").toString()));
 			}
 
-			if(x.size() == 0 || y.size(0))
+			if(x.size() == 0 || y.size() == 0)
 				return 0.0;
 
 			// System.out.println("X - " + x);
