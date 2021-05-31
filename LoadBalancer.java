@@ -136,9 +136,9 @@ public class LoadBalancer {
 		        JSONObject item = metricsIterator.next();
 
 		        if(item.get("area") != null)
-					//x.add(Double.parseDouble(item.get("area").toString()));
+					x.add(Double.parseDouble(item.get("area").toString()));
 				if(item.get("instr_count") != null)
-					//y.add(Double.parseDouble(item.get("instr_count").toString()));
+					y.add(Double.parseDouble(item.get("instr_count").toString()));
 
 		  //       System.out.println("AREA - " + item.get("area"));
 				// System.out.println("INSTR - " + item.get("instr_count"));
