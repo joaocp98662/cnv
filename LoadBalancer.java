@@ -114,7 +114,7 @@ public class LoadBalancer {
  			testeMap.put("127.1.0.0", "2");
  			testeMap.put("127.1.0.0", "3");
 
- 			for (Object key : testeMap.keys()) { 
+ 			for (Object key : testeMap.keySet()) { 
 
  				// for(String teste : testeMap.get(key.toString())) {
  				// 	System.out.println(teste);
