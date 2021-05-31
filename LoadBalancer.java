@@ -26,6 +26,8 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import org.apache.commons.io.IOUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
