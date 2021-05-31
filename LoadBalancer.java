@@ -144,14 +144,12 @@ public class LoadBalancer {
 			System.out.println("X - " + x);
 			System.out.println("Y - " + y);
 
-			// JsonArray x = (JsonArray) metrics.get("area");
-			// JsonArray y = (JsonArray) metrics.get("instr_count");
+			double area = (args[7] - args[5]) * (args[11] - args[9]);
 
-			// Double area = (args[7] - args[5]) * (args[11] - args[9]);
+			//LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
+			LinearRegression lr = new LinearRegression(x.toArray(), y.toArray());
 
-			// LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
-
-			// System.out.println("Prediction - " - lr.predict(area));
+			System.out.println("Prediction - " - lr.predict(area));
 
 			// Get imageID
 
