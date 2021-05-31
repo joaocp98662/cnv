@@ -108,19 +108,6 @@ public class LoadBalancer {
 
 		try {
 
-			Multimap<String, String> testeMap = ArrayListMultimap.create();
-
-			testeMap.put("127.1.0.0", "1");
-			testeMap.put("127.1.0.0", "2");
-			testeMap.put("127.1.0.0", "3");			
-
-			for (Object key : testeMap.keys()) { 
-
-				System.out.println(testeMap.get(key.toString()));
-				//totalInstructions += LoadBalancer.getPredictedInstrunctions()
-
-			}			
-
 			// Get imageID
 
 			Filter filterImageByName = new Filter("name");
@@ -194,15 +181,11 @@ public class LoadBalancer {
 
 					// for (Object key : instancesMap.keys()) { 
 
-					// 	for(String query : instancesMap.get(key)) {
 
-					// 		System.out.println("QUERY INSIDE - " + )
-
-					// 	}
-
-					// 	//totalInstructions += LoadBalancer.getPredictedInstrunctions()
 		
-					// }					
+					// }
+
+					System.out,println(LoadBalancer.getPredictedInstrunctions(query));
 
 					// choose the right instance
 					boolean firstTime = true;
@@ -259,11 +242,11 @@ public class LoadBalancer {
         
 	}
 
-	private static double getPredictedInstrunctions(String query) {
+	private static double getPredictedInstrunctions(query) {
 
 		String[] args = LoadBalancer.getQueryArgs(query);
 
-		JSONArray metrics = DataBase.getDataForPrediction("metrics", "20248", "GREEDY_SCAN");
+		JSONArray metrics = DataBase.getDataForPrediction("metrics", args);
 		
 		List<Double> x = new ArrayList<Double>();
 		List<Double> y = new ArrayList<Double>();
