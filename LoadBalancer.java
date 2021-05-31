@@ -268,7 +268,7 @@ public class LoadBalancer {
 
 		String[] args = LoadBalancer.getQueryArgs(query);
 
-		JSONArray metrics = DataBase.getDataForPrediction("metrics", args);
+		JSONArray metrics = DataBase.getDataForPrediction("metrics", args[1], args[17]);
 		
 		List<Double> x = new ArrayList<Double>();
 		List<Double> y = new ArrayList<Double>();
