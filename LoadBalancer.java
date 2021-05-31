@@ -110,8 +110,8 @@ public class LoadBalancer {
 
 			JSONArray metrics = DataBase.getDataForPrediction("metrics", args[1], args[17]);
 			
-			List<Double> x = new ArrayList<Double>();
-			List<Double> y = new ArrayList<Double>();
+			// List<Double> x = new ArrayList<Double>();
+			// List<Double> y = new ArrayList<Double>();
 
 			System.out.println(metrics.toString());
 
@@ -130,8 +130,8 @@ public class LoadBalancer {
 
 			int index = 0;
 
-			Double[] x;
-			Double[] y;
+			double[] x;
+			double[] y;
 
 			while(metricsIterator.hasNext()) {
 
