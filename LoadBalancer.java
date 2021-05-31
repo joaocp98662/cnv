@@ -116,9 +116,9 @@ public class LoadBalancer {
 
 			for (Object key : testeMap.keys()) { 
 
-				for(String query : testeMap.get(key)) {
+				for(String teste : testeMap.get(key)) {
 
-					System.out.println("QUERY INSIDE - " + query);
+					System.out.println("QUERY INSIDE - " + teste);
 
 				}
 
