@@ -239,14 +239,21 @@ public class LoadBalancer {
 			//instancesMap.remove(instanceIP, query); TOOOOOOOOOOOOOOO CHECKKKKKKKKKKKKKKK!!!!!!! 
 			throw new IOException(e.getMessage());
         }
+        catch(Exception e) {
+        	throw new Exception(e.getMessage());
+        }
         
 	}
 
-	private static double getPredictedInstrunctions(String query) {
+	private static double getPredictedInstrunctions(String query) throws Exception {
 
 		String[] args = LoadBalancer.getQueryArgs(query);
 
-		JSONArray metrics = DataBase.getDataForPrediction("metrics", args);
+		try {
+			JSONArray metrics = DataBase.getDataForPrediction("metrics", args);
+		} catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
 		
 		List<Double> x = new ArrayList<Double>();
 		List<Double> y = new ArrayList<Double>();
