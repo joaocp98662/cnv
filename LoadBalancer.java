@@ -241,7 +241,7 @@ public class LoadBalancer {
 						}
 		 			}
 
-		 			if(instanceIP == null) {}
+		 			if(instanceIP == null) {
 
 						// choose the right instance
 						firstTime = true;				
