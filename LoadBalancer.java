@@ -108,18 +108,18 @@ public class LoadBalancer {
 
 		try {			
 
-			Multimap<String, String> testeMap = ArrayListMultimap.create();
+			// Multimap<String, String> testeMap = ArrayListMultimap.create();
 
- 			testeMap.put("127.1.0.0", ["1", "2", "3"]);		
+ 		// 	testeMap.put("127.1.0.0", ["1", "2", "3"]);		
 
- 			for (Object key : testeMap.keys()) { 
+ 		// 	for (Object key : testeMap.keys()) { 
 
- 				for(String teste : testeMap.get(key.toString())) {
- 					System.out.println(teste);
- 				} 				
- 				//totalInstructions += LoadBalancer.getPredictedInstrunctions()
+ 		// 		for(String teste : testeMap.get(key.toString())) {
+ 		// 			System.out.println(teste);
+ 		// 		} 				
+ 		// 		//totalInstructions += LoadBalancer.getPredictedInstrunctions()
 
- 			}			
+ 		// 	}			
 
 			// Get imageID
 
@@ -176,6 +176,23 @@ public class LoadBalancer {
 
 				sem.release();
 
+				double prediction = LoadBalancer.getPredictedInstrunctions(query);
+
+				if(prediction < 15742117) {
+
+
+					for (Instance inst : instances) {
+
+						if(instancesMap.get(inst.getPublicIpAddress()).toString().equals("[]")) {
+							//terminate instance
+							LoadBalancer.terminateInstance(inst.getInstanceId());
+							System.out.println("Instance with ID " + inst.getInstanceId() + " terminated");
+							break;
+						}
+					}					
+
+				}
+
 				for (Instance inst : instances) {
 
 					if(instancesMap.get(inst.getPublicIpAddress()).toString().equals("[]")) {
@@ -187,16 +204,6 @@ public class LoadBalancer {
 
 				// Enters if didn't find any free instance
 				if(instanceIP == null) {
-
-					System.out.println("ENTROU CARAGO!!!");
-
-					// double totalInstructions = 0;
-
-					// for (Object key : instancesMap.keys()) { 
-
-
-		
-					// }
 
 					System.out.println(LoadBalancer.getPredictedInstrunctions(query));
 
@@ -241,15 +248,9 @@ public class LoadBalancer {
 
 
 		} catch (AmazonServiceException ase) {
-            // System.out.println("Caught Exception: " + ase.getMessage());
-            // System.out.println("Reponse Status Code: " + ase.getStatusCode());
-            // System.out.println("Error Code: " + ase.getErrorCode());
-            // System.out.println("Request ID: " + ase.getRequestId());
-            //instancesMap.remove(instanceIP, query); TOOOOOOOOOOOOOOO CHECKKKKKKKKKKKKKKK!!!!!!!
             throw new AmazonServiceException(ase.getMessage());
         }
 		catch (IOException e) {
-			//instancesMap.remove(instanceIP, query); TOOOOOOOOOOOOOOO CHECKKKKKKKKKKKKKKK!!!!!!! 
 			throw new IOException(e.getMessage());
         }
         catch(Exception e) {
@@ -562,6 +563,38 @@ public class LoadBalancer {
 
         return instanceIP;
 	}
+
+	public static String getInstanceIDByIP(String instanceIP) throws Exception {
+
+		//init();
+
+		String instanceID = null;
+
+		try {
+
+	        Filter filterEC2ByIP = new Filter("instance-ip");
+	        filterEC2ByIP.withValues(instanceIP);
+	        Filter filterEC2ByState = new Filter("instance-state-name");
+	        filterEC2ByState.withValues("running");
+
+	        DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
+	        describeInstancesRequest.withFilters(filterEC2ByIP, filterEC2ByState);
+
+			DescribeInstancesResult describeInstancesResult = ec2.describeInstances(describeInstancesRequest);			
+
+			Reservation reservation = describeInstancesResult.getReservations().get(0);
+
+			instanceIP = reservation.getInstances().get(0).getInstanceId();
+
+        } catch (AmazonServiceException ase) {
+	        System.out.println("Caught Exception: " + ase.getMessage());
+	        System.out.println("Reponse Status Code: " + ase.getStatusCode());
+	        System.out.println("Error Code: " + ase.getErrorCode());
+	        System.out.println("Request ID: " + ase.getRequestId());
+        }
+
+        return instanceID;
+	}	
 
 	public static boolean checkInstanceExists(String instanceIP) throws Exception {
 
