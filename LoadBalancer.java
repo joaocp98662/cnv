@@ -106,16 +106,32 @@ public class LoadBalancer {
 
 		try {
 
-			JSONObject metrics = DataBase.getDataForPrediction(tableName, args[1], args[17]);
+			JSONArray metrics = DataBase.getDataForPrediction(tableName, args[1], args[17]);
+			
+			List<Double> x = new ArrayList<Double>();
+			List<Double> y = new ArrayList<Double>();
 
-			JsonArray x = (JsonArray) metrics.get("area");
-			JsonArray y = (JsonArray) metrics.get("instr_count");
+			Iterator<JSONObject> metricsIterator =  metrics.iterator();
 
-			Double area = (args[7] - args[5]) * (args[11] - args[9]);
+			 while(metricsIterator.hasNext()) {
 
-			LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
+		        JSONObject item = objectIterator.next();
+		        x.add(item.get("area"));
+		        y.add(item.get("instr_count"));
+	
+			}
 
-			System.out.println("Prediction - " - lr.predict(area));
+			System.out.println("X - " + x);
+			System.out.println("Y - " + y);
+
+			// JsonArray x = (JsonArray) metrics.get("area");
+			// JsonArray y = (JsonArray) metrics.get("instr_count");
+
+			// Double area = (args[7] - args[5]) * (args[11] - args[9]);
+
+			// LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
+
+			// System.out.println("Prediction - " - lr.predict(area));
 
 			// Get imageID
 
