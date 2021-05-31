@@ -263,7 +263,11 @@ public class LoadBalancer {
 
 		String[] args = LoadBalancer.getQueryArgs(query);
 
-		JSONArray metrics = DataBase.getDataForPrediction("metrics", args[1], args[17]);
+		try {
+			JSONArray metrics = DataBase.getDataForPrediction("metrics", args[1], args[17]);
+		} catach(Exception e) {
+			System.out.prinln(e.getMessage);
+		}
 		
 		List<Double> x = new ArrayList<Double>();
 		List<Double> y = new ArrayList<Double>();
