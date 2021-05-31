@@ -108,6 +108,8 @@ public class LoadBalancer {
 
 		try {
 
+			System.out.println(LoadBalancer.getPredictedInstrunctions(query));
+
 			// Get imageID
 
 			Filter filterImageByName = new Filter("name");
@@ -183,9 +185,7 @@ public class LoadBalancer {
 
 
 		
-					// }
-
-					System.out.println(LoadBalancer.getPredictedInstrunctions(query));
+					// }					
 
 					// choose the right instance
 					boolean firstTime = true;
@@ -281,7 +281,7 @@ public class LoadBalancer {
 			//System.out.println("Prediction - " + lr.predict(area));
 
 			return lr.predict(area);
-			
+
 		} catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}			
