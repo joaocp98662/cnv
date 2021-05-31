@@ -115,14 +115,19 @@ public class LoadBalancer {
 
 			System.out.println(metrics.toString());
 
-			for (i = 0; i < metrics.length; i++) {
+			System.out.println("TESTEEEEE");
 
-				System.out.println(metrics[i]);
+            Iterator<String> iterator = metrics.iterator();
+            while (iterator.hasNext()) {
+                System.out.println(iterator.next());
+            }			
+
+			//for (JSONObject metric : metrics) {
 				//x.add(Double.parseDouble(metric.get("area").toString()));
 				//y.add(Double.parseDouble(metric.get("instr_count").toString()));
 				//System.out.println("AREA - " + metric.get("area").toString());
 				//System.out.println("INSTR - " + metric.get("instr_count").toString());
-			}
+			//}
 
 			// Iterator<JSONObject> metricsIterator =  metrics.iterator();
 
