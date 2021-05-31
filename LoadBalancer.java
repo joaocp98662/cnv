@@ -106,7 +106,7 @@ public class LoadBalancer {
 
 		try {
 
-			JSONArray metrics = DataBase.getDataForPrediction(tableName, args[1], args[17]);
+			JSONArray metrics = DataBase.getDataForPrediction("metrics", args[1], args[17]);
 			
 			List<Double> x = new ArrayList<Double>();
 			List<Double> y = new ArrayList<Double>();
@@ -115,7 +115,7 @@ public class LoadBalancer {
 
 			 while(metricsIterator.hasNext()) {
 
-		        JSONObject item = objectIterator.next();
+		        JSONObject item = metricsIterator.next();
 		        x.add(item.get("area"));
 		        y.add(item.get("instr_count"));
 	
