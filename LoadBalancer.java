@@ -117,7 +117,7 @@ public class LoadBalancer {
 
 			System.out.println("TESTEEEEE");
 
-            Iterator<String> iterator = metrics.iterator();
+            Iterator<JSONObject> iterator = metrics.iterator();
             while (iterator.hasNext()) {
                 System.out.println(iterator.next());
             }			
