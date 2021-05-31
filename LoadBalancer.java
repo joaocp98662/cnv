@@ -108,7 +108,7 @@ public class LoadBalancer {
 
 		try {
 
-			Multimap<String, Integer> testeMap = ArrayListMultimap.create();
+			Multimap<String, String> testeMap = ArrayListMultimap.create();
 
 			testeMap.put("127.1.0.0", "1");
 			testeMap.put("127.1.0.0", "2");
