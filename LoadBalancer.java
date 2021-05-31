@@ -128,14 +128,21 @@ public class LoadBalancer {
 
 			Iterator<JSONObject> metricsIterator =  metrics.iterator();
 
-			 while(metricsIterator.hasNext()) {
+			int index = 0;
+
+			Double[] x;
+			Double[] y;
+
+			while(metricsIterator.hasNext()) {
 
 		        JSONObject item = metricsIterator.next();
 
 		        if(item.get("area") != null)
-					x.add(Double.parseDouble(item.get("area").toString()));
+					//x.add(Double.parseDouble(item.get("area").toString()));
+					x[i] = Double.parseDouble(item.get("area").toString());
 				if(item.get("instr_count") != null)
-					y.add(Double.parseDouble(item.get("instr_count").toString()));
+					//y.add(Double.parseDouble(item.get("instr_count").toString()));
+					y[i] = Double.parseDouble(item.get("instr_count").toString());
 
 		  //       System.out.println("AREA - " + item.get("area"));
 				// System.out.println("INSTR - " + item.get("instr_count"));
@@ -145,9 +152,6 @@ public class LoadBalancer {
 			System.out.println("Y - " + y);
 
 			double area = (Double.parseDouble(args[7]) - Double.parseDouble(args[5])) * (Double.parseDouble(args[11]) - Double.parseDouble(args[9]));
-
-			Double[] x = (Double[])x.toArray(new Double[x.size()]);
-			Double[] y = (Double[])y.toArray(new Double[y.size()]);
 
 			//LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
 			LinearRegression lr = new LinearRegression(x, y);
