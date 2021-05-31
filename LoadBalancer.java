@@ -116,7 +116,7 @@ public class LoadBalancer {
 
 			for (Object key : testeMap.keys()) { 
 
-				System.out.println(testeMap.get(key));
+				System.out.println(testeMap.get(key.toString()));
 				//totalInstructions += LoadBalancer.getPredictedInstrunctions()
 
 			}			
