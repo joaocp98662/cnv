@@ -119,7 +119,7 @@ public class LoadBalancer {
 
             Iterator<JSONObject> iterator = metrics.iterator();
             while (iterator.hasNext()) {
-                System.out.println(iterator.next());
+                System.out.println(iterator.next().get("area"));
             }			
 
 			//for (JSONObject metric : metrics) {
