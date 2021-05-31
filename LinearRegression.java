@@ -1,5 +1,7 @@
 package loadbalancer;
 
+import java.util.List;
+
 /*************************************************************************
  *  Compilation:  javac LinearRegression.java
  *  Execution:    java  LinearRegression
