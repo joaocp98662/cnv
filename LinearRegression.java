@@ -41,10 +41,10 @@ public class LinearRegression {
      * @throws java.lang.IllegalArgumentException if the lengths of the two arrays are not equal
      */
     public LinearRegression(List<Double> x, List<Double> y) {
-        if (x.length != y.length) {
+        if (x.size() != y.size()) {
             throw new IllegalArgumentException("array lengths are not equal");
         }
-        N = x.length;
+        N = x.size();
 
         // first pass
         double sumx = 0.0, sumy = 0.0, sumx2 = 0.0;
