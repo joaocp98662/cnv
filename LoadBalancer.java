@@ -264,7 +264,7 @@ public class LoadBalancer {
         
 	}
 
-	private static double getPredictedInstrunctions(query) {
+	private static double getPredictedInstrunctions(String query) {
 
 		String[] args = LoadBalancer.getQueryArgs(query);
 
