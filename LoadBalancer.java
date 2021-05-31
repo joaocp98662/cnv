@@ -113,19 +113,21 @@ public class LoadBalancer {
 			List<Double> x = new ArrayList<Double>();
 			List<Double> y = new ArrayList<Double>();
 
-			Iterator<JSONObject> metricsIterator =  metrics.iterator();
+			System.out.println(metrics.toString());
 
-			 while(metricsIterator.hasNext()) {
+			// Iterator<JSONObject> metricsIterator =  metrics.iterator();
 
-		        JSONObject item = metricsIterator.next();
-		        // x.add(Double.parseDouble(item.get("area").toString()));
-		        // y.add(Double.parseDouble(item.get("instr_count").toString()));
-		        System.out.println("AREA - " + item.get("area"));
-				System.out.println("INSTR - " + item.get("instr_count"));
-			}
+			//  while(metricsIterator.hasNext()) {
 
-			System.out.println("X - " + x);
-			System.out.println("Y - " + y);
+		 //        JSONObject item = metricsIterator.next();
+		 //        // x.add(Double.parseDouble(item.get("area").toString()));
+		 //        // y.add(Double.parseDouble(item.get("instr_count").toString()));
+		 //        System.out.println("AREA - " + item.get("area"));
+			// 	System.out.println("INSTR - " + item.get("instr_count"));
+			// }
+
+			// System.out.println("X - " + x);
+			// System.out.println("Y - " + y);
 
 			// JsonArray x = (JsonArray) metrics.get("area");
 			// JsonArray y = (JsonArray) metrics.get("instr_count");
