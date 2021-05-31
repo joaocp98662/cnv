@@ -112,23 +112,14 @@ public class LoadBalancer {
 
 			testeMap.put("127.1.0.0", "1");
 			testeMap.put("127.1.0.0", "2");
-			testeMap.put("127.1.0.0", "3");
+			testeMap.put("127.1.0.0", "3");			
 
-			for (Map.Entry<K, V> entry: testeMap.entries()) {
-			    System.out.println(entry.getKey() + ": " + entry.getValue());
+			for (Object key : testeMap.keys()) { 
+
+				System.out.println(testeMap.get(key));
+				//totalInstructions += LoadBalancer.getPredictedInstrunctions()
+
 			}			
-
-			// for (Object key : testeMap.keys()) { 
-
-			// 	for(String teste : testeMap.get(key)) {
-
-			// 		System.out.println("QUERY INSIDE - " + teste);
-
-			// 	}
-
-			// 	//totalInstructions += LoadBalancer.getPredictedInstrunctions()
-
-			// }			
 
 			// Get imageID
 
