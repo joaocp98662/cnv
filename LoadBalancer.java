@@ -156,7 +156,7 @@ public class LoadBalancer {
 			//LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
 			LinearRegression lr = new LinearRegression(x, y);
 
-			System.out.println("Prediction - " - lr.predict(area));
+			System.out.println("Prediction - " + lr.predict(area));
 
 			// Get imageID
 
