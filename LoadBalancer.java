@@ -118,9 +118,10 @@ public class LoadBalancer {
 			 while(metricsIterator.hasNext()) {
 
 		        JSONObject item = metricsIterator.next();
-		        x.add(Double.parseDouble(item.get("area").toString()));
-		        y.add(Double.parseDouble(item.get("instr_count").toString()));
-	
+		        // x.add(Double.parseDouble(item.get("area").toString()));
+		        // y.add(Double.parseDouble(item.get("instr_count").toString()));
+		        System.out.println("AREA - " + item.get("area"));
+				System.out.println("INSTR - " + item.get("instr_count"));
 			}
 
 			System.out.println("X - " + x);
