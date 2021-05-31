@@ -108,21 +108,21 @@ public class LoadBalancer {
 
 		try {			
 
-			Multimap<String, String> testeMap = ArrayListMultimap.create();
+			// Multimap<String, String> testeMap = ArrayListMultimap.create();
 
- 			testeMap.put("127.1.0.0", "1");
- 			testeMap.put("127.1.0.0", "2");
- 			testeMap.put("127.1.0.0", "3");
+ 		// 	testeMap.put("127.1.0.0", "1");
+ 		// 	testeMap.put("127.1.0.0", "2");
+ 		// 	testeMap.put("127.1.0.0", "3");
 
- 			for (Object key : testeMap.keySet()) { 
+ 		// 	for (Object key : testeMap.keySet()) { 
 
- 				for(String teste : testeMap.get(key.toString())) {
- 					System.out.println(teste);
- 				} 
- 				//System.out.println(key.toString());
- 				//totalInstructions += LoadBalancer.getPredictedInstrunctions()
+ 		// 		for(String teste : testeMap.get(key.toString())) {
+ 		// 			System.out.println(teste);
+ 		// 		} 
+ 		// 		//System.out.println(key.toString());
+ 		// 		//totalInstructions += LoadBalancer.getPredictedInstrunctions()
 
- 			}			
+ 		// 	}			
 
 			// Get imageID
 
@@ -208,27 +208,62 @@ public class LoadBalancer {
 				// Enters if didn't find any free instance
 				if(instanceIP == null) {
 
-					System.out.println(LoadBalancer.getPredictedInstrunctions(query));
+					double totalInstructions = 0;
+					double leastTotalInstructions = 0;
+					double predictionInstr;
 
-					// choose the right instance
 					boolean firstTime = true;
-					int countJobs = 0;
 
-					for (Object key : instancesMap.keys()) { 
+					outerloop:
+		 			for (Object key : instanceMap.keySet()) { 
+
+		 				for(String instanceQueryRequest : instanceMap.get(key.toString())) {
+		 					
+		 					predictionInstr = LoadBalancer.getPredictedInstrunctions(instanceQueryRequest)
+
+		 					if(predictionInstr == 0)
+		 						break outerloop;
+
+		 					totalInstructions += predictionInstr;
+		 				}
 
 						if(firstTime) {
-							System.out.println("ENTROU 2!!!");
-							countJobs = instancesMap.keys().count(key);
+							leastTotalInstructions = totalInstructions;
 							instanceIP = key.toString();
 							firstTime = false;
 						
 						} else {
 
-							if(instancesMap.keys().count(key) < countJobs) {
-								System.out.println("3ª Condition ... ");
+							if(totalInstructions < leastTotalInstructions) {
 								instanceIP = key.toString();
+								leastTotalInstructions = totalInstructions;
 							}
-						}	
+						}
+		 			}
+
+		 			if(instanceIP == null) {}
+
+						// choose the right instance
+						firstTime = true;				
+						int countJobs = 0;
+
+						for (Object key : instancesMap.keys()) { 
+
+							if(firstTime) {
+								System.out.println("ENTROU 2!!!");
+								countJobs = instancesMap.keys().count(key);
+								instanceIP = key.toString();
+								firstTime = false;
+							
+							} else {
+
+								if(instancesMap.keys().count(key) < countJobs) {
+									System.out.println("3ª Condition ... ");
+									instanceIP = key.toString();
+									countJobs = instancesMap.keys().count(key);
+								}
+							}	
+						}
 					}
 				}
 			}
@@ -287,6 +322,9 @@ public class LoadBalancer {
 				if(item.get("instr_count") != null)
 					y.add(Double.parseDouble(item.get("instr_count").toString()));
 			}
+
+			if(x.size() == 0 || y.size(0))
+				return 0.0;
 
 			// System.out.println("X - " + x);
 			// System.out.println("Y - " + y);
