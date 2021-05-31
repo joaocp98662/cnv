@@ -55,7 +55,7 @@ import com.amazonaws.services.ec2.model.DescribeAvailabilityZonesResult;
 
 //Zé adicionou
 import com.google.common.collect.Multimap;
-import com.google.common.collect.ArrayListMultimap;  
+import com.google.common.collect.ArrayListMultimap;
 
 import database.DataBase;
 
@@ -100,11 +100,22 @@ public class LoadBalancer {
 	}
 
 
-	public static InputStream manageWorkLoad(String query) throws Exception {
+	public static InputStream manageWorkLoad(String query, String[] args) throws Exception {
 
 		init();
 
 		try {
+
+			JSONObject metrics = DataBase.getDataForPrediction(tableName, args[1], args[17]);
+
+			JsonArray x = (JsonArray) metrics.get("area");
+			JsonArray y = (JsonArray) metrics.get("instr_count");
+
+			Double area = (args[7] - args[5]) * (args[11] - args[9]);
+
+			LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
+
+			System.out.println("Prediction - " - lr.predict(area));
 
 			// Get imageID
 
@@ -174,6 +185,17 @@ public class LoadBalancer {
 				if(instanceIP == null) {
 
 					System.out.println("ENTROU CARAGO!!!");
+
+					// JSONObject metrics = DataBase.getDataForPrediction(tableName, args[1], args[17]);
+
+					// JsonArray x = (JsonArray) metrics.get("area");
+					// JsonArray y = (JsonArray) metrics.get("instr_count");
+
+					// Double area = (args[7] - args[5]) * (args[11] - args[9]);
+
+					// LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
+
+					// System.out.println("Prediction - " - lr.predict(area));
 
 					// choose the right instance
 					boolean firstTime = true;
@@ -331,7 +353,7 @@ public class LoadBalancer {
 
 			try {
 
-				InputStream response = LoadBalancer.manageWorkLoad(query);
+				InputStream response = LoadBalancer.manageWorkLoad(query, newArgs);
 
 				// Send response to browser.
 				final Headers hdrs = t.getResponseHeaders();
