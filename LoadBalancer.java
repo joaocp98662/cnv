@@ -219,7 +219,7 @@ public class LoadBalancer {
 
 		 				for(String instanceQueryRequest : instanceMap.get(key.toString())) {
 		 					
-		 					predictionInstr = LoadBalancer.getPredictedInstrunctions(instanceQueryRequest)
+		 					predictionInstr = LoadBalancer.getPredictedInstrunctions(instanceQueryRequest);
 
 		 					if(predictionInstr == 0)
 		 						break outerloop;
