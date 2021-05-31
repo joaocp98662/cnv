@@ -108,6 +108,24 @@ public class LoadBalancer {
 
 		try {
 
+			Multimap<String, Integer> testeMap = ArrayListMultimap.create();
+
+			testeMap.put("127.1.0.0", "1");
+			testeMap.put("127.1.0.0", "2");
+			testeMap.put("127.1.0.0", "3");
+
+			for (Object key : testeMap.keys()) { 
+
+				for(String query : testeMap.get(key)) {
+
+					System.out.println("QUERY INSIDE - " + query);
+
+				}
+
+				//totalInstructions += LoadBalancer.getPredictedInstrunctions()
+
+			}			
+
 			// Get imageID
 
 			Filter filterImageByName = new Filter("name");
