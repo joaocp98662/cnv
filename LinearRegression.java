@@ -80,15 +80,15 @@ public class LinearRegression {
         svar0 = svar/N + xbar*xbar*svar1;
     }
 
-    public static void main(final String[] args) throws Exception {
+    // public static void main(final String[] args) throws Exception {
 
-        double[] x = {10.0, 20.0, 30.0, 40.0};
-        double[] y = {1.0, 2.0, 3.0, 4.0};
+    //     double[] x = {10.0, 20.0, 30.0, 40.0};
+    //     double[] y = {1.0, 2.0, 3.0, 4.0};
 
-        LinearRegression lr = new LinearRegression(x, y);
+    //     LinearRegression lr = new LinearRegression(x, y);
 
-        System.out.println(lr.predict(50));
-    }
+    //     System.out.println(lr.predict(50));
+    // }
 
    /**
      * Returns the <em>y</em>-intercept &alpha; of the best of the best-fit line <em>y</em> = &alpha; + &beta; <em>x</em>.
