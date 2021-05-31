@@ -108,18 +108,21 @@ public class LoadBalancer {
 
 		try {			
 
-			// Multimap<String, String> testeMap = ArrayListMultimap.create();
+			Multimap<String, String> testeMap = ArrayListMultimap.create();
 
- 		// 	testeMap.put("127.1.0.0", ["1", "2", "3"]);		
+ 			testeMap.put("127.1.0.0", "1");
+ 			testeMap.put("127.1.0.0", "2");
+ 			testeMap.put("127.1.0.0", "3");
 
- 		// 	for (Object key : testeMap.keys()) { 
+ 			for (Object key : testeMap.keys()) { 
 
- 		// 		for(String teste : testeMap.get(key.toString())) {
- 		// 			System.out.println(teste);
- 		// 		} 				
- 		// 		//totalInstructions += LoadBalancer.getPredictedInstrunctions()
+ 				// for(String teste : testeMap.get(key.toString())) {
+ 				// 	System.out.println(teste);
+ 				// } 
+ 				System.out.println(key.toString());
+ 				//totalInstructions += LoadBalancer.getPredictedInstrunctions()
 
- 		// 	}			
+ 			}			
 
 			// Get imageID
 
