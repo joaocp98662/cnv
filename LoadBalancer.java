@@ -185,7 +185,7 @@ public class LoadBalancer {
 		
 					// }
 
-					System.out,println(LoadBalancer.getPredictedInstrunctions(query));
+					System.out.println(LoadBalancer.getPredictedInstrunctions(query));
 
 					// choose the right instance
 					boolean firstTime = true;
@@ -242,7 +242,7 @@ public class LoadBalancer {
         
 	}
 
-	private static double getPredictedInstrunctions(query) {
+	private static double getPredictedInstrunctions(String query) {
 
 		String[] args = LoadBalancer.getQueryArgs(query);
 
