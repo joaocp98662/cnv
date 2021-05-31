@@ -177,16 +177,19 @@ public class LoadBalancer {
 
 					System.out.println("ENTROU CARAGO!!!");
 
-					// JSONObject metrics = DataBase.getDataForPrediction(tableName, args[1], args[17]);
+					double totalInstructions = 0;
 
-					// JsonArray x = (JsonArray) metrics.get("area");
-					// JsonArray y = (JsonArray) metrics.get("instr_count");
+					for (Object key : instancesMap.keys()) { 
 
-					// Double area = (args[7] - args[5]) * (args[11] - args[9]);
+						for(String query : instancesMap.get(key)) {
 
-					// LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
+							System.out.println("QUERY INSIDE - " + )
 
-					// System.out.println("Prediction - " - lr.predict(area));
+						}
+
+						//totalInstructions += LoadBalancer.getPredictedInstrunctions()
+		
+					}					
 
 					// choose the right instance
 					boolean firstTime = true;
@@ -243,7 +246,9 @@ public class LoadBalancer {
         
 	}
 
-	private static double getPredictedInstrunctions(String w, String[] args) {
+	private static double getPredictedInstrunctions(query) {
+
+		String[] args = LoadBalancer.getQueryArgs(query);
 
 		JSONArray metrics = DataBase.getDataForPrediction("metrics", args);
 		
@@ -255,7 +260,6 @@ public class LoadBalancer {
 		Iterator<JSONObject> metricsIterator =  metrics.iterator();
 
 		int index = 0;
-
 
 		while(metricsIterator.hasNext()) {
 
@@ -328,6 +332,41 @@ public class LoadBalancer {
 		cloudWatch = AmazonCloudWatchClientBuilder.standard().withRegion("us-east-1").withCredentials(new AWSStaticCredentialsProvider(credentials)).build();
     }
 
+
+    private static String[] getQueryArgs(String query) {
+
+		String[] params = query.split("&");
+
+		/*
+		for(String p: params) {
+			System.out.println(p);
+		}
+		*/
+
+		// Store as if it was a direct call to SolverMain.
+		ArrayList<String> newArgs = new ArrayList<>();
+		for (String p : params) {
+			String[] splitParam = p.split("=");
+
+			if(splitParam[0].equals("i")) {
+				splitParam[1] = LoadBalancer.sap.getMapsDirectory() + "/" + splitParam[1];
+			}
+
+			newArgs.add("-" + splitParam[0]);
+			newArgs.add(splitParam[1]);
+		}
+
+		// Store from ArrayList into regular String[].
+		final String[] args = new String[newArgs.size()];
+		int i = 0;
+		for(String arg: newArgs) {
+			args[i] = arg;
+			i++;
+		}
+
+		return args;
+
+    }
 
 	static class MyHandler implements HttpHandler {
 		@Override
