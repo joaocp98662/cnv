@@ -147,7 +147,7 @@ public class LoadBalancer {
 			double area = (Double.parseDouble(args[7]) - Double.parseDouble(args[5])) * (Double.parseDouble(args[11]) - Double.parseDouble(args[9]));
 
 			//LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
-			LinearRegression lr = new LinearRegression(x.toArray(), y.toArray());
+			LinearRegression lr = new LinearRegression(x.getDoubleArray(), y.getDoubleArray());
 
 			System.out.println("Prediction - " - lr.predict(area));
 
